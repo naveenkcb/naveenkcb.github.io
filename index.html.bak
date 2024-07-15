@@ -2,9 +2,9 @@
 <script src='https://d3js.org/d3.v5.min.js'></script>
 <style> circle {fill: red; stroke: black;} </style>
 <body onload='init()'>
-<title> Final Project Web page </title>
-<svg width=300 height=300> </svg>
-<script> src="js/plot.js" </script>
+	<title> Final Project Web page </title>
+	<svg width=300 height=300> </svg>
+	<script> src="js/plot.js" </script>
 
 </body>
 </html>
