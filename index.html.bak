@@ -1,6 +1,6 @@
 <html>
 <script src='https://d3js.org/d3.v5.min.js'></script>
-<style> circle {fill: red; stroke: black;} </style>
+<style> circle {fill: blue; stroke: black;} </style>
 <body onload='init()'>
 	<svg width=300 height=300> 
 	</svg>
