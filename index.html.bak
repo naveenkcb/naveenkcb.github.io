@@ -1,12 +1,10 @@
 <html>
 <script src='https://d3js.org/d3.v5.min.js'></script>
-<style> circle {fill: lightblue; stroke: black;} </style>
-<body
-	<title> Final Project web page </title>
-	onload='init()'>
+<style> circle {fill: red; stroke: black;} </style>
+<body onload='init()'>
+<title> Final Project Web page </title>
 <svg width=300 height=300> </svg>
-
-<script> src="plot.js" </script>
+<script> src="js/plot.js" </script>
 
 </body>
 </html>
