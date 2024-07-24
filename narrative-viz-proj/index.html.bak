@@ -8,12 +8,11 @@
 </head>
 
 <body onload="load1(); load2(); load3();">
-    <h1 id="intro">Infant Mortality Rate in 2023</h1>
+    <h1 id="intro">Fuel Efficiency of Automobiles in 2017</h1>
     <div>
-        <span class="italic">By Naveen Baskaran - UIUC CS 416 - July 2024</span>
+        <span class="italic">By Amrutha Gujjar - UIUC CS 498 - July 2020</span>
         <hr>
-		<!-- Begin page content -->
-        <!--- img src="car.png" alt="car" width="240" height="120" -->
+        <img src="car.png" alt="car" width="240" height="120">
         <h3>
             Given the increasing effects of climate change, and the high volume of automobiles in the world, we must seek to better understand
             the mileages of various automobiles. There are many factors that can affect the mileage of your car (See:
