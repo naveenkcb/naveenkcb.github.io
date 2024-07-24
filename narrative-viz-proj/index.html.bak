@@ -1,144 +1,65 @@
 <!DOCTYPE html>
-<html>
-<script src="https://d3js.org/d3.v5.min.js"></script>
+<meta charset="utf-8">
 
-<head>
-    <title>Fuel Efficiency</title>
-    <link rel="stylesheet" type="text/css" href="index.css">
-</head>
+<!-- Load d3.js -->
+<script src="https://d3js.org/d3.v6.js"></script>
 
-<body onload="load1(); load2(); load3();">
-    <h1 id="intro">Infant Mortality Rate in 2023</h1>
-    <div>
-        <span class="italic">By Naveen Baskaran - UIUC CS 416 - July 2024</span>
-        <hr>
-		<!-- Begin page content -->
-        <!--- img src="car.png" alt="car" width="240" height="120" -->
-        <h4>
-            Infant mortality rate review for 2023.
-        </h4>
-        <ul>
-            <li>
-                <a href="#one" class="contents">countries with higher IMR!</a>
-            </li>
-            <li>
-                <a href="#two" class="contents">Does a country's GDP have a direct correlation to IMR?</a>
-            </li>
-            <li>
-                <a href="#three" class="contents">Fertility rate impact?</a>
-            </li>
-        </ul>
-        <hr>
+<!-- Create a div where the graph will take place -->
+<div id="my_dataviz"></div>
 
-    </div>
-    <a href="#two" class="back">Next</a>
-	
-    <h2 id="one">Countries with more than average infant mortality rate</h2>
-    <!---
-	<p>See how the highway and city mileages compare for major car brands. Click on the buttons to explore each category. </p>
-    <div>
-        <button id="highway" onclick="change('AverageHighwayMPG')">Average Highway MPG</button>
-        <button id="city" onclick="change('AverageCityMPG')">Average City MPG</button>
-    </div>
-	--->
-    <svg id="scene1" width=1050 height=1100>
-        <!---
-		<text x="900" y="700">Good gas mileage</text>
-		
-        <line x1="0" y1="700" x2="900" y2="700" stroke="black" stroke-dasharray="4" />
-		--->
-    </svg>
+<script>
 
+// set the dimensions and margins of the graph
+const margin = {top: 30, right: 30, bottom: 70, left: 60},
+    width = 460 - margin.left - margin.right,
+    height = 400 - margin.top - margin.bottom;
 
-    <hr>
-    <a href="#intro" class="back">Back to Top</a>
-    <a href="#one" class="back">Previous</a>
-    <a href="#three" class="back">Next</a>
+// append the svg object to the body of the page
+const svg = d3.select("#my_dataviz")
+  .append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+  .append("g")
+    .attr("transform", `translate(${margin.left}, ${margin.top})`);
 
-    <h2 id="two">Do Engine Cylinders Affect Mileage?</h2>
-    <p>Hover over each engine cylinder category in the legend to better understand the trend. Additionally, hovering over each
-        data point itself will indicate which make of the car you are hovering over via an interactive tooltip.
-    </p>
-    <svg id="scene2" width=1050 height=400></svg>
-    <hr>
+// Parse the Data
+d3.csv("https://raw.githubusercontent.com/holtzy/data_to_viz/master/Example_dataset/7_OneCatOneNum_header.csv").then ( function(data) {
 
-    <a href="#intro" class="back">Back to Top</a>
-    <a href="#two" class="back">Previous</a>
-    <h2 id="three">What is the relationship between fuel type, number of engine cylinders and the mileage?</h2>
-    <p>This visualization shows us the relationship between all three fields: fuel type, engine cylinder, and average MPG. The size of the 
-        plotted point indicates the mileage, while the density represents the relative value of the cars that fall into that configuration of fuel type and
-        cylinder number.
-        </p>
-    <svg id="scene3" width=1050 height=1200></svg>
+  // sort data
+  data.sort(function(b, a) {
+    return a.Value - b.Value;
+  });
 
-    <!-- Script -->
-    <script src="vis.js"></script>
+  // X axis
+  const x = d3.scaleBand()
+    .range([ 0, width ])
+    .domain(data.map(d => d.Country))
+    .padding(0.2);
+  svg.append("g")
+    .attr("transform", `translate(0, ${height})`)
+    .call(d3.axisBottom(x))
+    .selectAll("text")
+      .attr("transform", "translate(-10,0)rotate(-45)")
+      .style("text-anchor", "end");
 
-    <hr>
-    <a href="#intro" class="back">Back to Top</a>
-    <h2>About this Visualization</h2>
-    <p>
-        This is a narrative visualization created for the CS 498 Data Visualization course. Overview: The above visualization utilizes
-        the slideshow narrative visualization technique, while incorporating hybrid elements of the drill-down technique.
-        Each slide contains guidance on how to interact with the visualization. The structure of the slides guides users
-        from one idea to the next, but there is still room for individual exploration at each stage. We accomplish visual
-        consistency by maintaining uniform elements throughout, introducing a mixture of text, image and chart elements,
-        and having meaningful colors.
-    </p>
+  // Add Y axis
+  const y = d3.scaleLinear()
+    .domain([0, 13000])
+    .range([ height, 0]);
+  svg.append("g")
+    .call(d3.axisLeft(y));
 
-    <h3>Scenes</h3>
-    <p>
-        The scenes themselves are constructed via HTML id tags. Each scene has a unique id that is linked via the buttons.The “Next/Previous”
-        buttons allow users to navigate from scene to scene independently, but the structure helps guide the overall narrative.
-        Each scene is composed of a unique chart that highlights its own distinct message.
-    </p>
-    <h3>Annotations</h3>
-    <p>
-        Annotations remain consistent on the charts, even throughout changes triggered by the interactions. This allows the user
-        to have some grounding on the overall message the visualization is trying to communicate. For example, the annotation
-        about a relatively good gas mileage stays consistent throughout the vis transformation from highway mileage to city
-        mileage. This can help a user better understand which car makes consistently have good mileage across both parameters.
-    </p>
-    <h3>Parameters</h3>
-    <p>
-        The visualizations have a handful of relevant parameters that help the user better explore the data. By interacting with
-        JavaScript input features, such as the toggle buttons or the interactive legend in vis2, the user can choose to see
-        data about a specific category, or even filter out the datapoints by hovering over specific engine cylinder categories.
-        The user input is used as a parameter that controls what the visualization portrays.
-    </p>
-    <h3>Triggers</h3>
-    <p>
-        The triggers are implemented via events and callbacks, such as “mouseover”, “mouseout” and “click”. When specific html elements
-        experience these events, the callback function is invoked, and we can change the visualization with respect to the
-        action indicated by the trigger. The example triggers we have here are the buttons and hovering legend.
-    </p>
-    <hr>
+  // Bars
+  svg.selectAll("mybar")
+    .data(data)
+    .enter()
+    .append("rect")
+      .attr("x", d => x(d.Country))
+      .attr("y", d => y(d.Value))
+      .attr("width", x.bandwidth())
+      .attr("height", d => height - y(d.Value))
+      .attr("fill", "#69b3a2")
 
-    <p>
-        <a href="#intro" class="back">Back to Top</a>
+})
 
-        <h2>Acknowledgements</h2>
-        <p>Listed here are the various sources I used for learning about D3. Elements of this visualization are drawn from the
-            examples cited below.
-        </p>
-        <ul>
-            <li>
-                <a href="https://flunky.github.io/cars2017.csv">Data Source</a>
-            </li>
-            <li>
-                <a href="https://bl.ocks.org/d3noob/4e4485d94aebf63ae8059258c40f2609">Tooltips</a>
-            </li>
-            <li>
-                <a href="https://www.d3-graph-gallery.com/graph/bubble_tooltip.html">Tooltips 2</a>
-            </li>
-            <li>
-                <a href="https://observablehq.com/@d3/d3-scaleordinal">ScaleOrdinal</a>
-            </li>
-            <li>
-                <a href="https://www.d3-graph-gallery.com/graph/bubble_template.html">Opacity change on hover</a>
-            </li>
-        </ul>
-    </p>
-</body>
-
-</html>
+</script>
