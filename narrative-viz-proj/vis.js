@@ -121,7 +121,7 @@ async function load1() {
         //         city_mpgs.push(key.AverageCityMPG)
         //     }
         // }
-        console.log(city_mpgs)
+        console.log(data_given)
 
         var makeScale = d3.scaleBand()
             .range([0, width])
@@ -151,7 +151,7 @@ async function load1() {
 			.attr("x", d => makeScale(d["Country"])
 			.attr("y", d => y(d["Infant mortality"])
             .attr("width", makeScale.bandwidth() )		
-            .attr("height", function (d, i) { return height - y(d["Infant mortality"]); })
+            .attr("height", function (d, i) { return height - y(d["Infant mortality"]); });
             
 			/*
 			.attr("fill", "#5E4FA2").on("mouseover", function (d, i) {
