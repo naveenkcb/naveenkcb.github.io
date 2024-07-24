@@ -121,7 +121,7 @@ async function load1() {
         //         city_mpgs.push(key.AverageCityMPG)
         //     }
         // }
-        // console.log(city_mpgs)
+        console.log(city_mpgs)
 
         var makeScale = d3.scaleBand()
             .range([0, width])
