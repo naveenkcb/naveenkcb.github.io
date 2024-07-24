@@ -1,8 +1,4 @@
 // --------------------------------------------------------------------------------// 
-// D3 Code for CS 498 Final Project - By Amrutha Gujjar
-// --------------------------------------------------------------------------------// 
-
-// --------------------------------------------------------------------------------// 
 // SETUP --------------------------------------------------------------------------//
 // --------------------------------------------------------------------------------// 
 
@@ -20,29 +16,30 @@ var margin = { top: 10, right: 100, bottom: 50, left: 50 },
     height = 1000 - margin.top - margin.bottom;
 
 // axis definition
+
 var x = d3.scaleBand()
     .domain([10, 20, 30, 40, 50])
     .range([0, width]);
-
-
-
-var y = d3.scaleLinear()
-    .domain([0, 120])
-    .range([height, 0]);
 
 var xAxis = d3.axisBottom()
     .scale(x)
     .ticks(5);
 
+/*
+var y = d3.scaleLinear()
+    .domain([0, 120])
+    .range([height, 0]);
+
 var yAxis = d3.axisLeft()
     .scale(y)
     .ticks(10);
+
 
 // axis appends
 scene1.append("g")
     .attr("transform", "translate(50,20)")
     .attr("class", "axis")
-    .call(yAxis);
+    .call(yAxis); */
 
 scene2.append("g")
     .attr("transform", "translate(50,360)")
@@ -50,18 +47,20 @@ scene2.append("g")
     .call(xAxis);
 
 // axis labels
+
 scene1.append('text')
     .attr('x', -500)
     .attr('y', 15)
     .attr('transform', 'rotate(-90)')
     .attr('text-anchor', 'middle')
-    .text('Mileage')
+    .text('Infant Mortality')
 
 scene1.append('text')
     .attr('x', 500)
     .attr('y', 1050)
     .attr('text-anchor', 'middle')
-    .text('Cars')
+    .text('Country')
+
 
 scene2.append('text')
     .attr('x', 500)
@@ -85,7 +84,7 @@ scene3.append('text')
 // --------------------------------------------------------------------------------// 
 // SCENE ONE ----------------------------------------------------------------------//
 // --------------------------------------------------------------------------------// 
-
+/*
 var makes = ["Acura", "Alfa Romeo", "Aston Martin", "Audi", "Bentley", "BMW", "Buick", "Cadillac", "Chevrolet", "Chrysler",
     "Dodge", "Ferrari", "Fiat", "Ford", "Genesis", "GMC", "Honda", "Hyundai", "Infiniti", "Jaguar", "Jeep", "Kia", "Lamborghini",
     "Land Rover", "Lexus", "Lincoln", "Lotus", "Maserati", "Mazda", "McLaren Automotive", "Mercedes-Benz", "MINI", "Mitsubishi",
@@ -108,9 +107,10 @@ var bar_tooltip = d3.select("body")
     .style("border-radius", "5px")
     .style("padding", "15px")
     .style("color", "white")
-
+*/
 async function load1() {
-    d3.csv("https://flunky.github.io/cars2017.csv").then(function (data_given) {
+    //d3.csv("https://flunky.github.io/cars2017.csv").then(function (data_given) {
+	d3.csv("world-data-2023.csv").then(function (data_given) {
         // var makes = [];
         // var highway_mpgs = [];
         // var city_mpgs = []
@@ -121,33 +121,40 @@ async function load1() {
         //         city_mpgs.push(key.AverageCityMPG)
         //     }
         // }
-        // console.log(city_mpgs)
+        console.log(data_given)
 
         var makeScale = d3.scaleBand()
             .range([0, width])
-            .domain(data_given.map(function (d) { return d.Make; }))
+            .domain(data_given.map(function (d) { return d.Country; }))
 
         var makeAxis = d3.axisBottom()
             .scale(makeScale)
-            .ticks(5);
+            .ticks(3);
+					
+		var y = d3.scaleLinear()
+					.domain([0, 100])
+					.range([height, 0]);
 
-        scene1.append("g")
-            .attr("transform", "translate(50,950)")
-            .attr("class", "axis")
-            .call(makeAxis)
-            .selectAll("text")
-            .attr("transform", "translate(-10,0)rotate(-30)")
-            .style("text-anchor", "end");
-
+		var yAxis = d3.axisLeft()
+					.scale(y)
+					.ticks(10);
+		
+		// draw bar chart
         scene1.selectAll("mybar")
             .data(data_given)
             .enter()
             .append("rect")
-            .attr("x", function (d, i) { return margin.left + makeScale(makes[i]); })
-            .attr("y", function (d, i) { return y(highway_mpgs[i]) + 10; })
-            .attr("width", makeScale.bandwidth() - 10)
-            .attr("height", function (d, i) { return height - y(highway_mpgs[i]); })
-            .attr("fill", "#5E4FA2").on("mouseover", function (d, i) {
+            //.attr("x", function (d, i) { return margin.left + makeScale(makes[i]); })
+            //.attr("y", function (d, i) { return y(highway_mpgs[i]) + 10; })
+			//.attr("width", makeScale.bandwidth() - 10)
+			
+			.attr("x", d => makeScale(d["Country"])
+			.attr("y", d => y(d["Infant mortality"])
+            .attr("width", makeScale.bandwidth() )		
+            .attr("height", function (d, i) { return height - y(d["Infant mortality"]); });
+            
+			/*
+			.attr("fill", "#5E4FA2").on("mouseover", function (d, i) {
                 bar_tooltip.transition()
                     .duration(200)
                     .style("opacity", .9);
@@ -159,11 +166,29 @@ async function load1() {
                 bar_tooltip.transition()
                     .duration(500)
                     .style("opacity", 0);
-            });
+            });*/
+			
+		// Y axis appends
+		scene1.append("g")
+			.attr("transform", "translate(50,20)")
+			.attr("class", "axis")
+			.call(yAxis);
+			
+		// X axis appends			
+		scene1.append("g")
+            .attr("transform", "translate(50,950)")
+            .attr("class", "axis")
+            .call(makeAxis)
+            //.selectAll("text")
+            //.attr("transform", "translate(-10,0)rotate(-30)")
+            //.style("text-anchor", "end");
+		
     })
 }
 
+
 // This function is called by the buttons on top of the plot
+/*
 function change(setting) {
     if (setting === "AverageHighwayMPG") {
         scene1.selectAll("rect")
@@ -181,6 +206,7 @@ function change(setting) {
             .attr("height", function (d, i) { return height - y(city_mpgs[i]); })
     }
 }
+*/
 
 // --------------------------------------------------------------------------------// 
 // SCENE TWO ----------------------------------------------------------------------//
