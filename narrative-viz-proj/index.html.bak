@@ -11,7 +11,7 @@
 
 // set the dimensions and margins of the graph
 const margin = {top: 30, right: 30, bottom: 70, left: 60},
-    width = 960 - margin.left - margin.right,
+    width = 2400 - margin.left - margin.right,
     height = 400 - margin.top - margin.bottom;
 
 // append the svg object to the body of the page
@@ -55,9 +55,9 @@ d3.csv("https://raw.githubusercontent.com/naveenkcb/naveenkcb.github.io/main/nar
     .enter()
     .append("rect")
       .attr("x", d => x(d.Country))
-      .attr("y", d => y(d."Infant_mortality"))
+      .attr("y", d => y(d.Infant_mortality))
       .attr("width", x.bandwidth())
-      .attr("height", d => height - y(d."Infant_mortality"))
+      .attr("height", d => height - y(d.Infant_mortality))
       //.attr("fill", "#69b3a2")
 	  .attr("fill", "green")
 
