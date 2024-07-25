@@ -67,7 +67,7 @@ d3.csv("https://raw.githubusercontent.com/naveenkcb/naveenkcb.github.io/main/nar
 	  .duration(800)
 	  .attr("y", function(d) { return y(d.Infant_mortality); })
 	  .attr("height", function(d) { return height - y(d.Infant_mortality); })
-	  .delay(function(d,i){console.log(i) ; return(i*100)})
+	  .delay(function(d,i){/*console.log(i) ;*/ return(i*100)})
 
 
 
@@ -78,12 +78,15 @@ d3.csv("https://raw.githubusercontent.com/naveenkcb/naveenkcb.github.io/main/nar
 
 <hr>
 
+<!-- Create a div where the graph will take place -->
+<div id="scene2"></div>
+
 // adding a scatterplot
 <script>
 
 // set the dimensions and margins of the graph
 var margin2 = {top: 10, right: 30, bottom: 30, left: 60},
-    width2 = 460 - margin.left - margin.right,
+    width2 = 560 - margin.left - margin.right,
     height2 = 400 - margin.top - margin.bottom;
 
 // append the svg object to the body of the page
