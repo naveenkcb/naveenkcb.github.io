@@ -61,6 +61,16 @@ d3.csv("https://raw.githubusercontent.com/naveenkcb/naveenkcb.github.io/main/nar
       //.attr("fill", "#69b3a2")
 	  .attr("fill", "green")
 
+	// Animation
+	svg.selectAll("rect")
+	  .transition()
+	  .duration(800)
+	  .attr("y", function(d) { return y(d.Infant_mortality); })
+	  .attr("height", function(d) { return height - y(d.Infant_mortality); })
+	  .delay(function(d,i){console.log(i) ; return(i*100)})
+
+})
+
 })
 
 </script>
