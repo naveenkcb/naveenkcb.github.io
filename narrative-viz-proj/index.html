@@ -5,7 +5,11 @@
 <script src="https://d3js.org/d3.v5.min.js"></script>
 
 <!-- Create a div where the graph will take place -->
-<div id="my_dataviz"></div>
+<div id="scene1"></div>
+
+<!-- Create a div where the graph will take place -->
+<div id="scene2"></div>
+
 
 <script>
 
@@ -15,7 +19,7 @@ const margin = {top: 30, right: 30, bottom: 70, left: 60},
     height = 400 - margin.top - margin.bottom;
 
 // append the svg object to the body of the page
-const svg = d3.select("#my_dataviz")
+const svg = d3.select("#scene1")
   .append("svg")
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
@@ -73,15 +77,12 @@ d3.csv("https://raw.githubusercontent.com/naveenkcb/naveenkcb.github.io/main/nar
 
 
 })
-
 </script>
+
 
 <hr>
 
-<!-- Create a div where the graph will take place -->
-<div id="scene2"></div>
-
-// adding a scatterplot
+//adding a scatterplot
 <script>
 
 // set the dimensions and margins of the graph
@@ -91,7 +92,7 @@ var margin2 = {top: 10, right: 30, bottom: 30, left: 60},
 
 // append the svg object to the body of the page
 var svg2 = d3.select("#scene2")
-  .append("svg2")
+  .append("svg")
     .attr("width", width2 + margin2.left + margin2.right)
     .attr("height", height2 + margin2.top + margin2.bottom)
   .append("g")
