@@ -25,8 +25,8 @@
 		<!-- Scene 1 -->
 
 		// set the dimensions and margins of the graph
-		const margin = {top: 30, right: 30, bottom: 220, left: 60},
-			width = 2400 - margin.left - margin.right,
+		const margin = {top: 30, right: 30, bottom: 200, left: 60},
+			width = 4000 - margin.left - margin.right,
 			height = 700 - margin.top - margin.bottom;
 
 		// append the svg object to the body of the page
@@ -54,8 +54,7 @@
 			.attr("transform", `translate(0, ${height})`)
 			.call(d3.axisBottom(x))
 			.selectAll("text")
-			  .attr("transform", "translate(-10,0)rotate(-90)")
-			  //.attr("transform", "translate(-10,0)")
+			  .attr("transform", "translate(-10,0)rotate(-45)")
 			  .style("text-anchor", "end");
 
 		  // Add Y axis
@@ -117,7 +116,8 @@
 		  svg2.append("g")
 			.attr("transform", "translate(0," + height2 + ")")
 			.call(d3.axisBottom(x2)
-				.tickValues([10, 10000000, 1000000000, 10000000000, 100000000000000])
+				//.tickValues([10, 10000000, 1000000000, 10000000000, 100000000000000])
+				.tickValues(10)
 				.tickFormat(d3.format("~s"))
 				);
 
