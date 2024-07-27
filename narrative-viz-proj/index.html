@@ -6,16 +6,13 @@
 
 <!-- Create a div where the graph will take place -->
 <div id="scene1"></div>
-
 <hr> 
-
-<!-- Create a div where the graph will take place -->
 <div id="scene2"></div>
-
 <hr> 
-
-<!-- Create a div where the graph will take place -->
 <div id="scene3"></div>
+
+
+<!-- Scene 1 -->
 
 <script>
 
@@ -85,7 +82,7 @@ d3.csv("https://raw.githubusercontent.com/naveenkcb/naveenkcb.github.io/main/nar
 })
 </script>
 
-/* scene 2 */
+<!-- Scene 2 -->
 
 <script>
 
@@ -141,53 +138,53 @@ d3.csv("https://raw.githubusercontent.com/naveenkcb/naveenkcb.github.io/main/nar
 </script>
 
 
-// scene 3 
+<!-- Scene 3 -->
 
 <script>
 
-// set the dimensions and margins of the graph
-var margin3 = {top: 10, right: 30, bottom: 30, left: 60},
-    width3 = 560 - margin3.left - margin3.right,
-    height3 = 400 - margin3.top - margin3.bottom;
+	// set the dimensions and margins of the graph
+	var margin3 = {top: 10, right: 30, bottom: 30, left: 60},
+		width3 = 560 - margin3.left - margin3.right,
+		height3 = 400 - margin3.top - margin3.bottom;
 
-// append the svg object to the body of the page
-var svg3 = d3.select("#scene3")
-  .append("svg")
-    .attr("width", width3 + margin3.left + margin3.right)
-    .attr("height", height3 + margin3.top + margin3.bottom)
-  .append("g")
-    .attr("transform",
-          "translate(" + margin3.left + "," + margin3.top + ")");
+	// append the svg object to the body of the page
+	var svg3 = d3.select("#scene3")
+	  .append("svg")
+		.attr("width", width3 + margin3.left + margin3.right)
+		.attr("height", height3 + margin3.top + margin3.bottom)
+	  .append("g")
+		.attr("transform",
+			  "translate(" + margin3.left + "," + margin3.top + ")");
 
-//Read the data
-d3.csv("https://raw.githubusercontent.com/naveenkcb/naveenkcb.github.io/main/narrative-viz-proj/world-data-2023.csv").then ( function(data) {
+	//Read the data
+	d3.csv("https://raw.githubusercontent.com/naveenkcb/naveenkcb.github.io/main/narrative-viz-proj/world-data-2023.csv").then ( function(data) {
 
-// Add X axis
-  var x3 = d3.scaleLinear()
-    .domain([0, 7])
-    .range([ 0, width3 ]);
-  svg3.append("g")
-    .attr("transform", "translate(0," + height3 + ")")
-    .call(d3.axisBottom(x3));
+	// Add X axis
+	  var x3 = d3.scaleLinear()
+		.domain([0, 7])
+		.range([ 0, width3 ]);
+	  svg3.append("g")
+		.attr("transform", "translate(0," + height3 + ")")
+		.call(d3.axisBottom(x3));
 
-  // Add Y axis
-  var y3 = d3.scaleLinear()
-    .domain([0, 100])
-    .range([ height3, 0]);
-  svg3.append("g")
-    .call(d3.axisLeft(y3));
+	  // Add Y axis
+	  var y3 = d3.scaleLinear()
+		.domain([0, 100])
+		.range([ height3, 0]);
+	  svg3.append("g")
+		.call(d3.axisLeft(y3));
 
-  // Add dots
-  svg3.append('g')
-    .selectAll("dot")
-    .data(data)
-    .enter()
-    .append("circle")
-      .attr("cx", function (d) { return x3(d.Fertility_Rate); } )
-      .attr("cy", function (d) { return y3(d.Infant_mortality); } )
-      .attr("r", 3)
-      .style("fill", "#69b3a2")
+	  // Add dots
+	  svg3.append('g')
+		.selectAll("dot")
+		.data(data)
+		.enter()
+		.append("circle")
+		  .attr("cx", function (d) { return x3(d.Fertility_Rate); } )
+		  .attr("cy", function (d) { return y3(d.Infant_mortality); } )
+		  .attr("r", 3)
+		  .style("fill", "#69b3a2")
 
-})
+	})
 
 </script>
