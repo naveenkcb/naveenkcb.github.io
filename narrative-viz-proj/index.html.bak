@@ -7,9 +7,15 @@
 <!-- Create a div where the graph will take place -->
 <div id="scene1"></div>
 
+<hr> 
+
 <!-- Create a div where the graph will take place -->
 <div id="scene2"></div>
 
+<hr> 
+
+<!-- Create a div where the graph will take place -->
+<div id="scene3"></div>
 
 <script>
 
@@ -77,13 +83,10 @@ d3.csv("https://raw.githubusercontent.com/naveenkcb/naveenkcb.github.io/main/nar
 
 
 })
-
 </script>
 
-<hr>
+/* scene 2 */
 
-
-// adding a scatterplot
 <script>
 
 // set the dimensions and margins of the graph
@@ -109,8 +112,11 @@ d3.csv("https://raw.githubusercontent.com/naveenkcb/naveenkcb.github.io/main/nar
     .range([ 0, width2 ])
 	.base(10);
   svg2.append("g")
-    .attr("transform", "translate(0," + height + ")")
-    .call(d3.axisBottom(x2));
+    .attr("transform", "translate(0," + height2 + ")")
+    .call(d3.axisBottom(x2)
+		.tickValues([10, 10000000, 1000000000, 10000000000, 100000000000000])
+		.tickFormat(d3.format("~s"))
+		);
 
   // Add Y axis
   var y2 = d3.scaleLinear()
@@ -127,7 +133,60 @@ d3.csv("https://raw.githubusercontent.com/naveenkcb/naveenkcb.github.io/main/nar
     .append("circle")
       .attr("cx", function (d) { return x2(d.GDP); } )
       .attr("cy", function (d) { return y2(d.Infant_mortality); } )
-      .attr("r", 1.5)
+      .attr("r", 3)
+      .style("fill", "#69b3a2")
+
+})
+
+</script>
+
+
+/* scene 3 */
+
+<script>
+
+// set the dimensions and margins of the graph
+var margin3 = {top: 10, right: 30, bottom: 30, left: 60},
+    width3 = 560 - margin.left - margin.right,
+    height3 = 400 - margin.top - margin.bottom;
+
+// append the svg object to the body of the page
+var chart3 = d3.select("#scene3")
+  .append("svg")
+    .attr("width", width3 + margin3.left + margin3.right)
+    .attr("height", height3 + margin3.top + margin3.bottom)
+  .append("g")
+    .attr("transform",
+          "translate(" + margin3.left + "," + margin3.top + ")");
+
+//Read the data
+//d3.csv("https://raw.githubusercontent.com/holtzy/data_to_viz/master/Example_dataset/2_TwoNum.csv", function(data) {
+d3.csv("https://raw.githubusercontent.com/naveenkcb/naveenkcb.github.io/main/narrative-viz-proj/world-data-2023.csv").then ( function(data) {
+
+// Add X axis
+  var x = d3.scaleLinear()
+    .domain([0, 7])
+    .range([ 0, width ]);
+  svg.append("g")
+    .attr("transform", "translate(0," + height + ")")
+    .call(d3.axisBottom(x));
+
+  // Add Y axis
+  var y2 = d3.scaleLinear()
+    .domain([0, 100])
+    .range([ height2, 0]);
+  svg2.append("g")
+    .call(d3.axisLeft(y2));
+
+  // Add dots
+  svg2.append('g')
+    .selectAll("dot")
+    .data(data)
+    .enter()
+    .append("circle")
+      .attr("cx", function (d) { return x2(d.Fertility_Rate); } )
+      .attr("cy", function (d) { return y2(d.Infant_mortality); } )
+      .attr("r", 3)
       .style("fill", "#69b3a2")
 
 })
