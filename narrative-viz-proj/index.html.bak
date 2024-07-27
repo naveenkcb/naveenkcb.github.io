@@ -25,9 +25,9 @@
 		<!-- Scene 1 -->
 
 		// set the dimensions and margins of the graph
-		const margin = {top: 30, right: 30, bottom: 180, left: 60},
+		const margin = {top: 30, right: 30, bottom: 220, left: 60},
 			width = 2400 - margin.left - margin.right,
-			height = 600 - margin.top - margin.bottom;
+			height = 700 - margin.top - margin.bottom;
 
 		// append the svg object to the body of the page
 		const svg = d3.select("#scene1")
@@ -54,8 +54,8 @@
 			.attr("transform", `translate(0, ${height})`)
 			.call(d3.axisBottom(x))
 			.selectAll("text")
-			  .attr("transform", "translate(-10,0)rotate(-45)")
-			  //.attr("transform", "translate(-10,0)")
+			  //.attr("transform", "translate(-10,0)rotate(-45)")
+			  .attr("transform", "translate(-10,0)")
 			  .style("text-anchor", "end");
 
 		  // Add Y axis
