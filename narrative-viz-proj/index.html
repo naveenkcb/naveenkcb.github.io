@@ -341,6 +341,25 @@ d3.csv("https://raw.githubusercontent.com/naveenkcb/naveenkcb.github.io/main/nar
 				.attr('text-anchor', 'middle')
 				.attr("transform", "rotate(-90)")
 				.text("Infant Mortality Rate");
+				
+
+			// Annotation
+			svg.append('rect')
+				.attr("x", 100)
+				.attr("y", 5)
+				.attr("width", 500)
+				.attr("height", 30)
+				.style("fill", 'lightblue')
+
+			svg.append('text')
+				.attr("x", 110)
+				.attr("y", 10)
+				.attr("width", 60)
+				.attr("height", 40)
+				.style("fill", 'red')
+				.text("Minimum wage has a greter influence on the infant death rate. As it increases, it tremendously lowers the infant mortality")
+				.attr("text-anchor", "left")
+				.style("alignment-baseline", "middle")
 
 })
 </script>
@@ -371,7 +390,6 @@ var svg = d3.select("#scene3")
           "translate(" + margin.left + "," + margin.top + ")");
 
 //Read the data
-//d3.csv("https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/iris.csv", function(data) {
 d3.csv("https://raw.githubusercontent.com/naveenkcb/naveenkcb.github.io/main/narrative-viz-proj/world-data-2023-cleaned-3.csv").then ( function(data) {
 
 
@@ -469,19 +487,19 @@ d3.csv("https://raw.githubusercontent.com/naveenkcb/naveenkcb.github.io/main/nar
 					
 			// Annotation
 			svg.append('rect')
-				.attr("x", 150)
+				.attr("x", 100)
 				.attr("y", 5)
 				.attr("width", 500)
 				.attr("height", 30)
 				.style("fill", 'lightblue')
 
 			svg.append('text')
-				.attr("x", 160)
-				.attr("y", 15)
-				.attr("width", 800)
+				.attr("x", 110)
+				.attr("y", 10)
+				.attr("width", 60)
 				.attr("height", 40)
 				.style("fill", 'red')
-				.text("Women giving birth to more children <br> potentially contribute to increased the infant deaths")
+				.text("Women giving birth to more children potentially contribute to increasing infant deaths")
 				.attr("text-anchor", "left")
 				.style("alignment-baseline", "middle")
 
