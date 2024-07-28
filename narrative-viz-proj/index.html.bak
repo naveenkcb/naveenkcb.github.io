@@ -456,7 +456,7 @@ d3.csv("https://raw.githubusercontent.com/naveenkcb/naveenkcb.github.io/main/nar
 	// Add X axis label:
 	svg.append("text")
 		.attr("text-anchor", "left")
-		.attr("x", width)
+		.attr("x", width/2)
 		.attr("y", height + margin.top + 20)
 		.text("Fertility Rate (# of childs per woman)");
 
