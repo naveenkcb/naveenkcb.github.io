@@ -68,9 +68,9 @@
 		d3.csv("https://raw.githubusercontent.com/naveenkcb/naveenkcb.github.io/main/narrative-viz-proj/world-data-2023-cleaned-3.csv").then ( function(data) {
 
 		  // sort data
-		/*  data.sort(function(b, a) {
-			return a.Value - b.Value;
-		  });  */
+		  data.sort(function(b, a) {
+			return a.Infant_Mortality - b.Infant_Mortality;
+		  });  
 
 		  // Add X axis
 		  const x1 = d3.scaleBand()
@@ -127,8 +127,8 @@
 					//bar_tooltip.html("Country: " + d.Country + " , " + "Infant Mortality: " + d.Infant_Mortality)
 					bar_tooltip.html("<b>Country:</b> " + d.Country + '<br>' +
 									 "<b>Infant Mortality:</b> " + d.Infant_Mortality)
-						.style("left", (d3.event.pageX) + "px")
-						.style("top", (d3.event.pageY - 28) + "px");
+							.style("left", (d3.event.pageX) + "px")
+							.style("top", (d3.event.pageY - 28) + "px");
 					})
 						
 				.on("mouseout", function (d) {
