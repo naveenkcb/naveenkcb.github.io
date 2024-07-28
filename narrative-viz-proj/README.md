@@ -1,8 +1,8 @@
-## CS 498 - UIUC - Narrative Visualization Final Project
+## CS 416 - UIUC - Narrative Visualization Final Project
 
-UIUC CS 498 Final Project Essay By Amrutha Gujjar
+Final Project Essay By Naveen Baskaran
 
-Messaging: Given the increasing effects of climate change, and the high volume of automobiles in the world, we must seek to better understand the mileages of various automobiles. There are many factors that can affect the mileage of your car (See: ​Link​) but in this interactive visualization, we will explore 2017 data about the the respective highway and city MPGs of automobiles, with respect to just a few of these factors, like engine cylinders, fuel type and the make of the vehicle.
+Messaging: This story telling is going to focus on Infant mortality rate (IMR) which is the probability of a child dying before their first birthday, expressed as the number of infant deaths per 1,000 live births. It's a key indicator of a society's overall health because many factors that contribute to infant deaths also affect the health of the entire population.There are many factors that contribute to the IMR. (See: ​Link​) I created this interactive visualization, to explore the data collected by the world bank indicators for the year 2023. This data contains around 197 countries across the world and various 2017 data about the the respective highway and city MPGs of automobiles, with respect to just a few of these factors, like engine cylinders, fuel type and the make of the vehicle.
 
 Narrative Structure: The above visualization utilizes the slideshow narrative visualization technique, while incorporating hybrid elements of the drill-down technique. Each slide contains guidance on how to interact with the visualization.
 Visual Structure: The structure of the slides guides users from one idea to the next, but there is still room for individual exploration at each stage. We accomplish visual consistency by maintaining uniform elements throughout, introducing a mixture of text, image and chart elements, and having meaningful colors.
