@@ -49,8 +49,12 @@
 
 // set the dimensions and margins of the graph
 var margin = {top: 10, right: 30, bottom: 30, left: 60},
-    width = 460 - margin.left - margin.right,
-    height = 400 - margin.top - margin.bottom;
+//    width = 460 - margin.left - margin.right,
+//    height = 400 - margin.top - margin.bottom;
+
+    width = 800 - margin.left - margin.right,
+    height = 500 - margin.top - margin.bottom;
+
 
 // append the svg object to the body of the page
 var svg = d3.select("#scene3")
@@ -87,6 +91,18 @@ d3.csv("https://raw.githubusercontent.com/naveenkcb/naveenkcb.github.io/main/nar
     //.range([ "#440154ff", "#21908dff", "#fde725ff"])
 	.range([ "cyan", "purple", "orange"])
 
+
+	var scatter_tooltip = d3.select("body")
+				.append("div")
+				.append("div")
+				.style("opacity", 0)
+				.attr("class", "tooltip")
+				.style("background-color", "black")
+				.style("border-radius", "15px")
+				.style("padding", "8px")
+				.style("color", "white")
+
+
   // Add dots
   svg.append('g')
     .selectAll("dot")
@@ -97,6 +113,20 @@ d3.csv("https://raw.githubusercontent.com/naveenkcb/naveenkcb.github.io/main/nar
       .attr("cy", function (d) { return y(d.Infant_Mortality); } )
       .attr("r", 5)
       .style("fill", function (d) { return color(d.IMR_Severity) } )
+	    .on("mouseover", function (d) {
+				scatter_tooltip.transition()
+								.duration(200)
+								.style("opacity", .9);
+							scatter_tooltip.html("Country: " + d.Country + " , " + "Infant Mortality: " + d.Infant_mortality)
+								.style("left", (d3.event.pageX) + "px")
+								.style("top", (d3.event.pageY - 28) + "px");
+						})
+						
+					.on("mouseout", function (d) {
+						scatter_tooltip.transition()
+							.duration(500)
+							.style("opacity", 0);
+					});
 
 	// Add X axis label:
 	svg.append("text")
@@ -112,6 +142,26 @@ d3.csv("https://raw.githubusercontent.com/naveenkcb/naveenkcb.github.io/main/nar
 		.attr("y", -margin.left+20)
 		.attr("x", -margin.top)
 		.text("Infant Mortality Rate (# of deaths per 1000 live births)")
+	
+
+					
+			// Annotation
+			scene3.append('rect')
+				.attr("x", 150)
+				.attr("y", 5)
+				.attr("width", 500)
+				.attr("height", 30)
+				.style("fill", 'lightblue')
+
+			scene3.append('text')
+				.attr("x", 160)
+				.attr("y", 15)
+				.attr("width", 60)
+				.attr("height", 20)
+				.style("fill", 'red')
+				.text("Hover the mouse over each data point to see additional details.")
+				.attr("text-anchor", "left")
+				.style("alignment-baseline", "middle")
 
 })
 
