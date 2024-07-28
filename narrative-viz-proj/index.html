@@ -24,11 +24,13 @@ var svg = d3.select("#my_dataviz")
           "translate(" + margin.left + "," + margin.top + ")");
 
 //Read the data
-d3.csv("https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/iris.csv", function(data) {
+//d3.csv("https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/iris.csv", function(data) {
+d3.csv("https://raw.githubusercontent.com/naveenkcb/naveenkcb.github.io/main/narrative-viz-proj/world-data-2023-cleaned-3.csv").then ( function(data) {
+
 
   // Add X axis
   var x = d3.scaleLinear()
-    .domain([4, 8])
+    .domain([0, 7])
     .range([ 0, width ]);
   svg.append("g")
     .attr("transform", "translate(0," + height + ")")
@@ -36,14 +38,14 @@ d3.csv("https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/ir
 
   // Add Y axis
   var y = d3.scaleLinear()
-    .domain([0, 9])
+    .domain([0, 100])
     .range([ height, 0]);
   svg.append("g")
     .call(d3.axisLeft(y));
 
   // Color scale: give me a specie name, I return a color
   var color = d3.scaleOrdinal()
-    .domain(["setosa", "versicolor", "virginica" ])
+    .domain(["Low", "Medium", "High" ])
     .range([ "#440154ff", "#21908dff", "#fde725ff"])
 
   // Add dots
@@ -52,10 +54,10 @@ d3.csv("https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/ir
     .data(data)
     .enter()
     .append("circle")
-      .attr("cx", function (d) { return x(d.Sepal_Length); } )
-      .attr("cy", function (d) { return y(d.Petal_Length); } )
+      .attr("cx", function (d) { return x(d.Fertility_Rate); } )
+      .attr("cy", function (d) { return y(d.Infant_Mortality); } )
       .attr("r", 5)
-      .style("fill", function (d) { return color(d.Species) } )
+      .style("fill", function (d) { return color(d.IMR_Severity) } )
 
 })
 
