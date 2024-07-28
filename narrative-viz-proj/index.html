@@ -9,7 +9,23 @@
 		<!-- Add styles -->
 			
 		<link rel="stylesheet" type="text/css" href="index.css">  
-		
+	<!--
+    <style>
+        .tooltip {
+            position: absolute;
+            text-align: center;
+            width: auto;
+            height: auto;
+            padding: 5px;
+            font: 12px sans-serif;
+            background: lightsteelblue;
+            border: 0px;
+            border-radius: 8px;
+            pointer-events: none;
+        }
+    </style>
+	--->
+
 	</head>
 
 	<body>
@@ -118,8 +134,8 @@
 
 		// set the dimensions and margins of the graph
 		var margin2 = {top: 10, right: 30, bottom: 30, left: 60},
-			width2 = 560 - margin2.left - margin2.right,
-			height2 = 400 - margin2.top - margin2.bottom;
+			width2 = 800 - margin2.left - margin2.right,
+			height2 = 500 - margin2.top - margin2.bottom;
 
 		// append the svg object to the body of the page
 		var scene2 = d3.select("#scene2")
@@ -134,7 +150,7 @@
 		d3.csv("https://raw.githubusercontent.com/naveenkcb/naveenkcb.github.io/main/narrative-viz-proj/world-data-2023.csv").then ( function(data) {
 		  
 		  // Add X axis
-		  var x2 = d3.scaleLog()
+		/*  var x2 = d3.scaleLog()
 			.domain([0, 21428000000000])
 			.range([ 0, width2 ])
 			.base(10);
@@ -144,7 +160,16 @@
 				//.tickValues([10, 10000000, 1000000000, 10000000000, 100000000000000])
 				.tickValues(10)
 				.tickFormat(d3.format("~s"))
-				);
+				);*/
+				
+		// Add X axis
+			  var x2 = d3.scaleLinear()
+				.domain([0, 14])
+				.range([ 0, width2]);
+			  scene2.append("g")
+				.attr("transform", "translate(0," + height2 + ")")
+				.call(d3.axisBottom(x2));
+
 
 		  // Add Y axis
 		  var y2 = d3.scaleLinear()
@@ -159,9 +184,9 @@
 			.data(data)
 			.enter()
 			.append("circle")
-			  .attr("cx", function (d) { return x2(d.GDP); } )
+			  .attr("cx", function (d) { return x2(d.Minimum_wage); } )
 			  .attr("cy", function (d) { return y2(d.Infant_mortality); } )
-			  .attr("r", 3)
+			  .attr("r", 5)
 			  .style("fill", "#69b3a2")
 
 		})
@@ -175,8 +200,8 @@
 
 			// set the dimensions and margins of the graph
 			var margin3 = {top: 10, right: 30, bottom: 30, left: 60},
-				width3 = 560 - margin3.left - margin3.right,
-				height3 = 400 - margin3.top - margin3.bottom;
+				width3 = 800 - margin3.left - margin3.right,
+				height3 = 500 - margin3.top - margin3.bottom;
 
 			// append the svg object to the body of the page
 			var scene3 = d3.select("#scene3")
@@ -186,10 +211,22 @@
 			  .append("g")
 				.attr("transform",
 					  "translate(" + margin3.left + "," + margin3.top + ")");
+			
+			var scatter_tooltip = d3.select("body")
+										.append("div")
+										.append("div")
+										.style("opacity", 0)
+										.attr("class", "tooltip")
+										.style("background-color", "black")
+										.style("border-radius", "15px")
+										.style("padding", "8px")
+										.style("color", "white")
+									
 
+			
 			//Read the data
 			d3.csv("https://raw.githubusercontent.com/naveenkcb/naveenkcb.github.io/main/narrative-viz-proj/world-data-2023.csv").then ( function(data) {
-
+			
 			// Add X axis
 			  var x3 = d3.scaleLinear()
 				.domain([0, 7])
@@ -205,16 +242,54 @@
 			  scene3.append("g")
 				.call(d3.axisLeft(y3));
 
+
+
 			  // Add dots
 			  scene3.append('g')
 				.selectAll("dot")
 				.data(data)
 				.enter()
 				.append("circle")
-				  .attr("cx", function (d) { return x3(d.Fertility_Rate); } )
+				  .attr("cx", function (d) { return x3(d.Fertility_Rate);  } )
 				  .attr("cy", function (d) { return y3(d.Infant_mortality); } )
-				  .attr("r", 3)
+				  //.attr("cx", d => x3(d["Fertility_Rate"]))
+				  //.attr("cy", d => y3(d["Infant_mortality"]))
+				  .attr("r", 5)
 				  .style("fill", "#69b3a2")
+				  
+				    .on("mouseover", function (d) {
+							scatter_tooltip.transition()
+								.duration(200)
+								.style("opacity", .9);
+							scatter_tooltip.html("Country: " + d.Country + " , " + "Infant Mortality: " + d.Infant_mortality)
+								.style("left", (d3.event.pageX) + "px")
+								.style("top", (d3.event.pageY - 28) + "px");
+						})
+						
+					.on("mouseout", function (d) {
+						scatter_tooltip.transition()
+							.duration(500)
+							.style("opacity", 0);
+					});
+					
+			// Annotation
+			scene3.append('rect')
+				.attr("x", 150)
+				.attr("y", 5)
+				.attr("width", 500)
+				.attr("height", 30)
+				.style("fill", 'lightblue')
+
+			scene3.append('text')
+				.attr("x", 160)
+				.attr("y", 15)
+				.attr("width", 60)
+				.attr("height", 20)
+				.style("fill", 'red')
+				.text("Hover the mouse over each data point to see additional details.")
+				.attr("text-anchor", "left")
+				.style("alignment-baseline", "middle")
+					
 
 			})
 

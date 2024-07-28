@@ -165,7 +165,7 @@
 		// Add X axis
 			  var x2 = d3.scaleLinear()
 				.domain([0, 14])
-				.range([ 0, width2 ]);
+				.range([ 0, width2]);
 			  scene2.append("g")
 				.attr("transform", "translate(0," + height2 + ")")
 				.call(d3.axisBottom(x2));
@@ -226,7 +226,7 @@
 			
 			//Read the data
 			d3.csv("https://raw.githubusercontent.com/naveenkcb/naveenkcb.github.io/main/narrative-viz-proj/world-data-2023.csv").then ( function(data) {
-
+			
 			// Add X axis
 			  var x3 = d3.scaleLinear()
 				.domain([0, 7])
@@ -250,8 +250,10 @@
 				.data(data)
 				.enter()
 				.append("circle")
-				  .attr("cx", function (d) { return x3(d.Fertility_Rate); } )
+				  .attr("cx", function (d) { console.log(x3(d.Fertility_Rate)) return x3(d.Fertility_Rate);  } )
 				  .attr("cy", function (d) { return y3(d.Infant_mortality); } )
+				  //.attr("cx", d => x3(d["Fertility_Rate"]))
+				  //.attr("cy", d => y3(d["Infant_mortality"]))
 				  .attr("r", 5)
 				  .style("fill", "#69b3a2")
 				  
