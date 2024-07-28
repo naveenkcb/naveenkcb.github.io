@@ -116,9 +116,10 @@
 			.data(data)
 			.enter()
 			.append("rect")
+				.attr("class", "mybar")
 			    .attr("x", d => x1(d.Country))
 			    .attr("y", d => y1(d.Infant_Mortality))
-			    .attr("width", x1.bandwidth())
+				.attr("width", x1.bandwidth())
 			    .attr("height", d => height - y1(d.Infant_Mortality))
 			    .attr("fill", function(d) { return color1(d.IMR_Severity) })
 				.on("mouseover", function (d) {
@@ -141,13 +142,13 @@
 					});
 					
 			//Animation
-			scene1.selectAll("rect")
+/*			scene1.selectAll("rect")
 			  .transition()
 			  .duration(800)
 			  .attr("y", function(d) { return y1(d.Infant_Mortality); })
 			  .attr("height", function(d) { return height - y1(d.Infant_Mortality); })
 			  .delay(function(d,i){ return(i*100) })
-
+*/
 
 	// Add X axis label:
 	scene1.append("text")
@@ -193,34 +194,32 @@ scene1.selectAll("labels")
     .on("mouseover", filterData)
     .on("mouseleave", filterDataOff)
 
-
-
-    function filterData(d) {
+    var function filterData(d) {
         scene1.selectAll('.mybar')
             .filter(function(data) {
-                return (data.IMR_Severity != data);
+                return (data.IMR_Severity != d);
             })
             .transition()
             .style('opacity', 0.05);
 
-        scene1.selectAll('.datapoints')
+/*        scene1.selectAll('.datapoints')
             .filter(function(data) {
-                return (data.IMR_Severity != data);
+                return (data.IMR_Severity != d);
             })
             .transition()
             .style('opacity', 0.05);
     }
-
+*/
     function filterDataOff(d) {
         scene1.selectAll('.mybar')
             .transition()
             .style('opacity', 0.8);
 
-        scene1.selectAll('.datapoints')
+/*        scene1.selectAll('.datapoints')
             .transition()
             .style('opacity', 0.8);
     }
-
+*/
 })	
 </script>
 
