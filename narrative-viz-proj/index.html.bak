@@ -98,6 +98,17 @@
 			.domain(["Low", "Medium", "High" ])
 			//.range([ "#440154ff", "#21908dff", "#fde725ff"])
 			.range([ "cyan", "purple", "orange"])
+		
+		//define tool tip properties
+		var bar_tooltip = d3.select("body")
+				.append("div")
+				.append("div")
+				.style("opacity", 0)
+				.attr("class", "tooltip")
+				.style("background-color", "black")
+				.style("border-radius", "15px")
+				.style("padding", "8px")
+				.style("color", "white")
 
 		  // Add Bars
 		  scene1.selectAll("mybar")
@@ -119,7 +130,7 @@
 					})
 						
 				.on("mouseout", function (d) {
-					scatter_tooltip2.transition()
+					bar_tooltip.transition()
 					.duration(500)
 					.style("opacity", 0);
 					});
@@ -137,30 +148,16 @@
 	scene1.append("text")
 		.attr("text-anchor", "end")
 		.attr("x", width)
-		.attr("y", height + margin.top + 20)
-		.text("Infant Mortality Rate");
-
+		.attr("y", height + margin.top + 190)
+		.text("Country");
+		
 	// Y axis label:
 	scene1.append("text")
 		.attr("text-anchor", "end")
 		.attr("transform", "rotate(-90)")
-		.attr("y", -margin.left+20)
+		.attr("y", -margin.left+80)
 		.attr("x", -margin.top)
-		.text("Country")
-
-
-		var bar_tooltip = d3.select("body")
-				.append("div")
-				.append("div")
-				.style("opacity", 0)
-				.attr("class", "tooltip")
-				.style("background-color", "black")
-				.style("border-radius", "15px")
-				.style("padding", "8px")
-				.style("color", "white")
-		
-
-
+		.text("Infant Mortality Rate");
 
 })	
 </script>
