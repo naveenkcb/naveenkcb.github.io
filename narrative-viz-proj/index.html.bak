@@ -15,7 +15,7 @@
 
 
 	<body>
-	<h1 id="intro">Infant Mortality Rate in 2023</h1>
+	<h1 id="intro">Infant Mortality Rate</h1>
     <div>
         <span class="italic">By Naveen Baskaran - UIUC CS 416 - July 2024</span>
         <hr>
@@ -38,12 +38,34 @@
 
     </div>
 	
-		<!-- Create a div where the graph will take place -->
-		<div id="scene1"></div>
-		<hr> 
-		<div id="scene2"></div>
-		<hr> 
-		<div id="scene3"></div>
+	<a href="#two" class="back">Next</a>
+	<!-- Create a div where the graph will take place -->
+	<div id="scene1"></div>
+	
+	<hr> 
+	
+	<a href="#intro" class="back">Back to Top</a>
+    <a href="#one" class="back">Previous</a>
+    <a href="#three" class="back">Next</a>
+	
+	<h2 id="two">Minimum wage impact on the contry's IMR?</h2>
+    <p>
+		Select the legends which has 3 groupings indicating a scale of low to high infant mortality distribution. Each group is identified by 
+		its own color. Hover over each legend to see those specific countries highlighted. Additionally, hovering over each data point gives 
+		additional data about the country
+    </p>
+	<div id="scene2"></div>
+	
+	<hr> 
+	
+	<a href="#intro" class="back">Back to Top</a>
+    <a href="#two" class="back">Previous</a>
+    <h2 id="three">What is the relationship between fuel type, number of engine cylinders and the mileage?</h2>
+    <p>This visualization shows us the relationship between all three fields: fuel type, engine cylinder, and average MPG. The size of the 
+        plotted point indicates the mileage, while the density represents the relative value of the cars that fall into that configuration of fuel type and
+        cylinder number.
+    </p>
+	<div id="scene3"></div>
 
 
 <!--- Scene1 --->
@@ -52,7 +74,7 @@
 		<!-- Scene 1 -->
 
 		// set the dimensions and margins of the graph
-		const margin1 = {top: 30, right: 30, bottom: 200, left: 130},
+		const margin1 = {top: 30, right: 30, bottom: 200, left: 110},
 			width1 = 4000 - margin1.left - margin1.right,
 			height1 = 700 - margin1.top - margin1.bottom;
 
@@ -97,6 +119,7 @@
 		  keys_color = ["Low", "Medium", "High" ]
 		  var color1 = d3.scaleOrdinal(keys_color)
 			.domain(["Low", "Medium", "High" ])
+			//.range([ "#440154ff", "#21908dff", "#fde725ff"])
 			.range([ "cyan", "purple", "orange"])
 		
 		//define tool tip properties
@@ -140,67 +163,58 @@
 					.style("opacity", 0);
 					});
 					
-/*
+			//Animation
+/*			scene1.selectAll("rect")
+			  .transition()
+			  .duration(800)
+			  .attr("y", function(d) { return y1(d.Infant_Mortality); })
+			  .attr("height", function(d) { return height - y1(d.Infant_Mortality); })
+			  .delay(function(d,i){ return(i*100) })
+*/
+
 	// Add X axis label:
 	scene1.append("text")
-		.attr("text-anchor", "middle")
-		.attr("x", width1)
-		.attr("y", height1 + margin1.top + 20)
+		.attr("text-anchor", "end")
+		.attr("x", width)
+		.attr("y", height + margin.top + 195)
 		.text("Country");
 		
 	// Y axis label:
 	scene1.append("text")
-		.attr("text-anchor", "middle")
+		.attr("text-anchor", "end")
 		.attr("transform", "rotate(-90)")
-		.attr("y", -margin1.left+20)
-		.attr("x", -margin1.top)
-		.text("Infant Mortality Rate");*/
-
-      /*  scene1.append('g')
-            .attr('transform', 'translate(' + (width1 / 2) + ', ' + (height1 + margin1.top + 42) + ')')
-            .append('text')
-				.attr("class", "x label")
-				.attr('text-anchor', 'middle')
-				.text("Country");
-				//.style("opacity", 0).transition().delay(3500).duration(2000).style("opacity", 1) */
-			
-        scene1.append('g')
-            .attr('transform', 'translate(' + (-margin1.left + 15) + ', ' + (height1 / 2 + margin1.top ) + ')')
-            .append('text')
-				.attr("class", "y label")
-				.attr('text-anchor', 'middle')
-				.attr("transform", "rotate(-90)")
-				.text("Infant Mortality Rate");
+		.attr("y", -margin.left+60)
+		.attr("x", -margin.top)
+		.text("Infant Mortality Rate");
 
 
-	// Add Legend
-	
-	var size = 20
-	scene1.selectAll("legend")
-		.data(keys_color)
-		.enter()
-		.append("rect")
-		.attr("x", 500)
-		.attr("y", function (d, i) { return 20 + i * (size + 5) })
-		.attr("width", size)
-		.attr("height", size)
-		.attr("stroke", "black")
-		.style("fill", function (d) { return color1(d) })
-		.on("mouseover", function (d) { filterData(d) })
-		.on("mouseleave", function (d) { filterDataOff(d) })
+	// Legend
+var size = 20
+scene1.selectAll("legend")
+    .data(keys_color)
+    .enter()
+    .append("rect")
+    .attr("x", 500)
+    .attr("y", function (d, i) { return 20 + i * (size + 5) })
+    .attr("width", size)
+    .attr("height", size)
+    .attr("stroke", "black")
+    .style("fill", function (d) { return color1(d) })
+    .on("mouseover", function (d) { filterData(d) })
+    .on("mouseleave", function (d) { filterDataOff(d) })
 
-	scene1.selectAll("labels")
-		.data(keys_color)
-		.enter()
-		.append("text")
-		.attr("x", 500 + size * 1.2)
-		.attr("y", function (d, i) { return 20 + i * (size + 5) + (size / 2) })
-		.style("fill", function (d) { return "black" })
-		.text(function (d) { return d })
-		.attr("text-anchor", "left")
-		.style("alignment-baseline", "middle")
-		.on("mouseover", function (d) { filterData(d) })
-		.on("mouseleave", function (d) { filterDataOff(d) }) 
+scene1.selectAll("labels")
+    .data(keys_color)
+    .enter()
+    .append("text")
+    .attr("x", 500 + size * 1.2)
+    .attr("y", function (d, i) { return 20 + i * (size + 5) + (size / 2) })
+    .style("fill", function (d) { return "black" })
+    .text(function (d) { return d })
+    .attr("text-anchor", "left")
+    .style("alignment-baseline", "middle")
+ /*   .on("mouseover", filterData)
+    .on("mouseleave", filterDataOff)  */
 
     function filterData(d) {
         scene1.selectAll('.mybar')
@@ -209,12 +223,23 @@
             })
             .transition()
             .style('opacity', 0.05);
+
+/*        scene1.selectAll('.datapoints')
+            .filter(function(data) {
+                return (data.IMR_Severity != d);
+            })
+            .transition()
+            .style('opacity', 0.05);  */
     }
 
     function filterDataOff(d) {
         scene1.selectAll('.mybar')
             .transition()
             .style('opacity', 0.9);
+
+/*        scene1.selectAll('.datapoints')
+            .transition()
+            .style('opacity', 0.8); */
     }
 
 })	
@@ -313,52 +338,18 @@ d3.csv("https://raw.githubusercontent.com/naveenkcb/naveenkcb.github.io/main/nar
 
 	// Add X axis label:
 	scene2.append("text")
-		.attr("text-anchor", "left")
-		.attr("x", width2)
-		.attr("y", height2 + margin2.top + 20)
+		.attr("text-anchor", "end")
+		.attr("x", width)
+		.attr("y", height + margin.top + 20)
 		.text("Minimum Wage");
 
-/*	// Y axis label:
+	// Y axis label:
 	scene2.append("text")
-		.attr("text-anchor", "middle")
+		.attr("text-anchor", "end")
 		.attr("transform", "rotate(-90)")
-		.attr("y", -margin2.left + 20)
-		.attr("x", -margin2.top)
-		.text("Infant Mortality Rate (# of deaths per 1000 live births)")*/
-
-    /*    scene2.append('g')
-            .attr('transform', 'translate(' + (width2 / 2) + ', ' + (height2 + margin2.top + 42) + ')')
-            .append('text')
-				.attr("class", "x label")
-				.attr('text-anchor', 'middle')
-				.text("Minimum Wage");*/
-				
-        scene2.append('g')
-            .attr('transform', 'translate(' + (-margin2.left + 15) + ', ' + (height2 / 2 + margin2.top ) + ')')
-            .append('text')
-				.attr("class", "y label")
-				.attr('text-anchor', 'middle')
-				.attr("transform", "rotate(-90)")
-				.text("Infant Mortality Rate");
-				
-
-			// Annotation
-			scene2.append('rect')
-				.attr("x", 100)
-				.attr("y", 5)
-				.attr("width", 600)
-				.attr("height", 30)
-				.style("fill", 'lightblue')
-
-			scene2.append('text')
-				.attr("x", 110)
-				.attr("y", 15)
-				.attr("width", 60)
-				.attr("height", 20)
-				.style("fill", 'red')
-				.text("Minimum wage has a greter influence on the infant death rate. As it increases, it tremendously lowers the infant mortality")
-				.attr("text-anchor", "left")
-				.style("alignment-baseline", "middle")
+		.attr("y", -margin.left+20)
+		.attr("x", -margin.top)
+		.text("Infant Mortality Rate (# of deaths per 1000 live births)")
 
 })
 </script>
@@ -371,7 +362,7 @@ d3.csv("https://raw.githubusercontent.com/naveenkcb/naveenkcb.github.io/main/nar
 
 <script>
 // set the dimensions and margins of the graph
-var margin = {top: 10, right: 30, bottom: 50, left: 60},
+var margin = {top: 10, right: 30, bottom: 30, left: 60},
 //    width = 460 - margin.left - margin.right,
 //    height = 400 - margin.top - margin.bottom;
 
@@ -389,6 +380,7 @@ var svg = d3.select("#scene3")
           "translate(" + margin.left + "," + margin.top + ")");
 
 //Read the data
+//d3.csv("https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/iris.csv", function(data) {
 d3.csv("https://raw.githubusercontent.com/naveenkcb/naveenkcb.github.io/main/narrative-viz-proj/world-data-2023-cleaned-3.csv").then ( function(data) {
 
 
@@ -455,56 +447,113 @@ d3.csv("https://raw.githubusercontent.com/naveenkcb/naveenkcb.github.io/main/nar
 
 	// Add X axis label:
 	svg.append("text")
-		.attr("text-anchor", "left")
-		.attr("x", width/2)
+		.attr("text-anchor", "end")
+		.attr("x", width)
 		.attr("y", height + margin.top + 20)
 		.text("Fertility Rate (# of childs per woman)");
 
-/*	// Y axis label:
+	// Y axis label:
 	svg.append("text")
-		.attr("text-anchor", "middle")
+		.attr("text-anchor", "end")
 		.attr("transform", "rotate(-90)")
 		.attr("y", -margin.left+20)
 		.attr("x", -margin.top)
 		.text("Infant Mortality Rate (# of deaths per 1000 live births)")
-
-        svg.append('g')
-            .attr('transform', 'translate(' + (width / 2) + ', ' + (height + margin.top + 42) + ')')
-            .append('text')
-				.attr("class", "x label")
-				.attr('text-anchor', 'middle')
-				.text("Fertility Rate"); */
-				
-        svg.append('g')
-            .attr('transform', 'translate(' + (-margin.left + 15) + ', ' + (height / 2 + margin.top ) + ')')
-            .append('text')
-				.attr("class", "y label")
-				.attr('text-anchor', 'middle')
-				.attr("transform", "rotate(-90)")
-				.text("Infant Mortality Rate");	
+	
 
 					
 			// Annotation
 			svg.append('rect')
-				.attr("x", 70)
+				.attr("x", 150)
 				.attr("y", 5)
-				.attr("width", 600)
+				.attr("width", 500)
 				.attr("height", 30)
 				.style("fill", 'lightblue')
 
 			svg.append('text')
-				.attr("x", 80)
+				.attr("x", 160)
 				.attr("y", 15)
 				.attr("width", 60)
 				.attr("height", 20)
 				.style("fill", 'red')
-				.text("Women giving birth to more children potentially contribute to increasing infant deaths")
+				.text("Hover the mouse over each data point to see additional details.")
 				.attr("text-anchor", "left")
 				.style("alignment-baseline", "middle")
 
 })
 
 </script>
+
+
+    <hr>
+    <a href="#intro" class="back">Back to Top</a>
+    <h2>About this Visualization</h2>
+    <p>
+        This is a narrative visualization created for the CS 498 Data Visualization course. 
+		
+		Overview: The above visualization utilizes the slideshow narrative visualization technique, while incorporating hybrid elements of the drill-down technique.
+        Each slide contains guidance on how to interact with the visualization. The structure of the slides guides users
+        from one idea to the next, but there is still room for individual exploration at each stage. We accomplish visual
+        consistency by maintaining uniform elements throughout, introducing a mixture of text, image and chart elements,
+        and having meaningful colors.
+    </p>
+
+    <h3>Scenes</h3>
+    <p>
+        The scenes themselves are constructed via HTML id tags. Each scene has a unique id that is linked via the buttons.The “Next/Previous”
+        buttons allow users to navigate from scene to scene independently, but the structure helps guide the overall narrative.
+        Each scene is composed of a unique chart that highlights its own distinct message.
+    </p>
+    <h3>Annotations</h3>
+    <p>
+        Annotations remain consistent on the charts, even throughout changes triggered by the interactions. This allows the user
+        to have some grounding on the overall message the visualization is trying to communicate. For example, the annotation
+        about a relatively good gas mileage stays consistent throughout the vis transformation from highway mileage to city
+        mileage. This can help a user better understand which car makes consistently have good mileage across both parameters.
+    </p>
+    <h3>Parameters</h3>
+    <p>
+        The visualizations have a handful of relevant parameters that help the user better explore the data. By interacting with
+        JavaScript input features, such as the toggle buttons or the interactive legend in vis2, the user can choose to see
+        data about a specific category, or even filter out the datapoints by hovering over specific engine cylinder categories.
+        The user input is used as a parameter that controls what the visualization portrays.
+    </p>
+    <h3>Triggers</h3>
+    <p>
+        The triggers are implemented via events and callbacks, such as “mouseover”, “mouseout” and “click”. When specific html elements
+        experience these events, the callback function is invoked, and we can change the visualization with respect to the
+        action indicated by the trigger. The example triggers we have here are the buttons and hovering legend.
+    </p>
+    <hr>
+
+    <p>
+        <a href="#intro" class="back">Back to Top</a>
+
+        <h2>Acknowledgements</h2>
+        <p>Listed here are the various sources I used for learning about D3. Elements of this visualization are drawn from the
+            examples cited below.
+        </p>
+        <ul>
+            <li>
+                <a href="https://flunky.github.io/cars2017.csv">Data Source</a>
+            </li>
+            <li>
+                <a href="https://bl.ocks.org/d3noob/4e4485d94aebf63ae8059258c40f2609">Tooltips</a>
+            </li>
+            <li>
+                <a href="https://www.d3-graph-gallery.com/graph/bubble_tooltip.html">Tooltips 2</a>
+            </li>
+            <li>
+                <a href="https://observablehq.com/@d3/d3-scaleordinal">ScaleOrdinal</a>
+            </li>
+            <li>
+                <a href="https://www.d3-graph-gallery.com/graph/bubble_template.html">Opacity change on hover</a>
+            </li>
+        </ul>
+    </p>
+</body>
+
+</html>
 
 </body>
 </html>
