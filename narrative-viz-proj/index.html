@@ -52,7 +52,7 @@
 		<!-- Scene 1 -->
 
 		// set the dimensions and margins of the graph
-		const margin1 = {top: 30, right: 30, bottom: 200, left: 60},
+		const margin1 = {top: 30, right: 30, bottom: 200, left: 90},
 			width1 = 4000 - margin1.left - margin1.right,
 			height1 = 700 - margin1.top - margin1.bottom;
 
@@ -124,9 +124,11 @@
 						bar_tooltip.transition()
 					.duration(200)
 					.style("opacity", .9);
-					//bar_tooltip.html("Country: " + d.Country + " , " + "Infant Mortality: " + d.Infant_Mortality)
+					
 					bar_tooltip.html("<b>Country:</b> " + d.Country + '<br>' +
-									 "<b>Infant Mortality:</b> " + d.Infant_Mortality)
+									 "<b>Infant Mortality:</b> " + d.Infant_Mortality +
+									 "<b>GDP:</b> " + d.GDP
+									 )
 							.style("left", (d3.event.pageX) + "px")
 							.style("top", (d3.event.pageY - 28) + "px");
 					})
@@ -150,7 +152,7 @@
 	scene1.append("text")
 		.attr("text-anchor", "end")
 		.attr("x", width)
-		.attr("y", height + margin.top + 200)
+		.attr("y", height + margin.top + 195)
 		.text("Country");
 		
 	// Y axis label:
@@ -240,7 +242,10 @@ d3.csv("https://raw.githubusercontent.com/naveenkcb/naveenkcb.github.io/main/nar
 				scatter_tooltip2.transition()
 								.duration(200)
 								.style("opacity", .9);
-				scatter_tooltip2.html("Country: " + d.Country + " , " + "Min Wage: " + d.Minimum_Wage)
+				
+				scatter_tooltip2.html("<b>Country:</b> " + d.Country + '<br>' +
+									"<b>Infant Mortality:</b> " + d.Infant_Mortality +
+									"<b>Minimum Wage:</b> " + d.Minimum_Wage)
 								.style("left", (d3.event.pageX) + "px")
 								.style("top", (d3.event.pageY - 28) + "px");
 				})
@@ -344,10 +349,13 @@ d3.csv("https://raw.githubusercontent.com/naveenkcb/naveenkcb.github.io/main/nar
       .attr("r", 5)
       .style("fill", function (d) { return color(d.IMR_Severity) } )
 	    .on("mouseover", function (d) {
-				scatter_tooltip.transition()
+				 scatter_tooltip.transition()
 								.duration(200)
 								.style("opacity", .9);
-							scatter_tooltip.html("Country: " + d.Country + " , " + "Infant Mortality: " + d.Infant_Mortality)
+				 scatter_tooltip.html("<b>Country:</b> " + d.Country + '<br>' +
+									 "<b>Infant Mortality:</b> " + d.Infant_Mortality +
+									 "<b>Fertility Rate:</b> " + d.Fertility_Rate
+									 )
 								.style("left", (d3.event.pageX) + "px")
 								.style("top", (d3.event.pageY - 28) + "px");
 						})
