@@ -313,7 +313,7 @@ d3.csv("https://raw.githubusercontent.com/naveenkcb/naveenkcb.github.io/main/nar
 
 	// Add X axis label:
 	scene2.append("text")
-		.attr("text-anchor", "middle")
+		.attr("text-anchor", "left")
 		.attr("x", width2)
 		.attr("y", height2 + margin2.top + 20)
 		.text("Minimum Wage");
@@ -337,7 +337,7 @@ d3.csv("https://raw.githubusercontent.com/naveenkcb/naveenkcb.github.io/main/nar
             .attr('transform', 'translate(' + (-margin2.left + 15) + ', ' + (height2 / 2 + margin2.top ) + ')')
             .append('text')
 				.attr("class", "y label")
-				.attr('text-anchor', 'left')
+				.attr('text-anchor', 'middle')
 				.attr("transform", "rotate(-90)")
 				.text("Infant Mortality Rate");
 				
@@ -486,14 +486,14 @@ d3.csv("https://raw.githubusercontent.com/naveenkcb/naveenkcb.github.io/main/nar
 					
 			// Annotation
 			svg.append('rect')
-				.attr("x", 100)
+				.attr("x", 70)
 				.attr("y", 5)
-				.attr("width", 500)
+				.attr("width", 600)
 				.attr("height", 30)
 				.style("fill", 'lightblue')
 
 			svg.append('text')
-				.attr("x", 110)
+				.attr("x", 80)
 				.attr("y", 15)
 				.attr("width", 60)
 				.attr("height", 20)
