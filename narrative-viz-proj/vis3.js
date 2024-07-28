@@ -110,7 +110,9 @@ var bar_tooltip = d3.select("body")
     .style("color", "white")
 
 async function load1() {
-    d3.csv("https://flunky.github.io/cars2017.csv").then(function (data_given) {
+    //d3.csv("https://flunky.github.io/cars2017.csv").then(function (data_given) {
+	d3.csv("https://raw.githubusercontent.com/naveenkcb/naveenkcb.github.io/main/narrative-viz-proj/world-data-2023.csv").then(function (data_given) {
+    //d3.csv("https://raw.githubusercontent.com/naveenkcb/naveenkcb.github.io/main/narrative-viz-proj/cars2017.csv").then(function (data_given) {
         // var makes = [];
         // var highway_mpgs = [];
         // var city_mpgs = []
@@ -121,7 +123,7 @@ async function load1() {
         //         city_mpgs.push(key.AverageCityMPG)
         //     }
         // }
-        // console.log(city_mpgs)
+         console.log(data_given)
 
         var makeScale = d3.scaleBand()
             .range([0, width])
