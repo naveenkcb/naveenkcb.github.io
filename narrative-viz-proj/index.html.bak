@@ -46,6 +46,81 @@
 		<div id="scene3"></div>
 
 
+<!--- Scene1 --->
+
+		<script>
+		<!-- Scene 1 -->
+
+		// set the dimensions and margins of the graph
+		const margin1 = {top: 30, right: 30, bottom: 200, left: 60},
+			width1 = 4000 - margin1.left - margin1.right,
+			height1 = 700 - margin1.top - margin1.bottom;
+
+		// Define Scene1 and append the svg canvas object to the body of the page
+		const scene1= d3.select("#scene1")
+		  .append("svg")
+			.attr("width", width1 + margin1.left + margin1.right)
+			.attr("height", height1 + margin1.top + margin1.bottom)
+		  .append("g")
+			.attr("transform", `translate(${margin1.left}, ${margin1.top})`);
+
+		// Parse the Data
+		d3.csv("https://raw.githubusercontent.com/naveenkcb/naveenkcb.github.io/main/narrative-viz-proj/world-data-2023.csv").then ( function(data) {
+
+		  // sort data
+		/*  data.sort(function(b, a) {
+			return a.Value - b.Value;
+		  });  */
+
+		  // Add X axis
+		  const x1 = d3.scaleBand()
+			.range([ 0, width1 ])
+			.domain(data.map(d => d.Country))
+			.padding(0.2);
+			
+		  scene1.append("g")
+			.attr("transform", `translate(0, ${height1})`)
+			.call(d3.axisBottom(x1))
+			.selectAll("text")
+			  .attr("transform", "translate(-10,0)rotate(-45)")
+			  .style("text-anchor", "end");
+
+		  // Add Y axis
+		  const y1 = d3.scaleLinear()
+			.domain([0, 100])
+			.range([ height1, 0]);
+			
+		  scene1.append("g")
+			.call(d3.axisLeft(y1));
+
+		  // Color scale: give me a IMR severity level, I return a color
+		  var color1 = d3.scaleOrdinal()
+			.domain(["Low", "Medium", "High" ])
+			//.range([ "#440154ff", "#21908dff", "#fde725ff"])
+			.range([ "cyan", "purple", "orange"])
+
+		  // Add Bars
+		  scene1.selectAll("mybar")
+			.data(data)
+			.enter()
+			.append("rect")
+			  .attr("x", d => x1(d.Country))
+			  .attr("y", d => y1(d.Infant_Mortality))
+			  .attr("width", x1.bandwidth())
+			  .attr("height", d => height - y1(d.Infant_Mortality))
+			  .attr("fill", function(d) { return color1(d.IMR_Severity) })
+
+/*			// Animation
+			scene1.selectAll("rect")
+			  .transition()
+			  .duration(800)
+			  .attr("y", function(d) { return y1(d.Infant_Mortality); })
+			  .attr("height", function(d) { return height - y1(d.Infant_Mortality); })
+			  .delay(function(d,i){ return(i*100) })
+*/
+		})
+</script>
+
 
 <!--- Scene2 --->
 
