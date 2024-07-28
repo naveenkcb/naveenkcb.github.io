@@ -52,7 +52,7 @@
 		<!-- Scene 1 -->
 
 		// set the dimensions and margins of the graph
-		const margin1 = {top: 30, right: 30, bottom: 200, left: 110},
+		const margin1 = {top: 30, right: 30, bottom: 200, left: 130},
 			width1 = 4000 - margin1.left - margin1.right,
 			height1 = 700 - margin1.top - margin1.bottom;
 
@@ -143,14 +143,14 @@
 
 	// Add X axis label:
 	scene1.append("text")
-		.attr("text-anchor", "end")
+		.attr("text-anchor", "middle")
 		.attr("x", width1)
 		.attr("y", height1 + margin1.top + 20)
 		.text("Country");
 		
 	// Y axis label:
 	scene1.append("text")
-		.attr("text-anchor", "end")
+		.attr("text-anchor", "middle")
 		.attr("transform", "rotate(-90)")
 		.attr("y", -margin1.left+20)
 		.attr("x", -margin1.top)
@@ -297,17 +297,17 @@ d3.csv("https://raw.githubusercontent.com/naveenkcb/naveenkcb.github.io/main/nar
 
 	// Add X axis label:
 	scene2.append("text")
-		.attr("text-anchor", "end")
-		.attr("x", width)
-		.attr("y", height + margin.top + 20)
+		.attr("text-anchor", "middle")
+		.attr("x", width2)
+		.attr("y", height2 + margin2.top + 20)
 		.text("Minimum Wage");
 
 	// Y axis label:
 	scene2.append("text")
-		.attr("text-anchor", "end")
+		.attr("text-anchor", "middle")
 		.attr("transform", "rotate(-90)")
-		.attr("y", -margin.left+20)
-		.attr("x", -margin.top)
+		.attr("y", -margin2.left + 20)
+		.attr("x", -margin2.top)
 		.text("Infant Mortality Rate (# of deaths per 1000 live births)")
 
 })
@@ -406,14 +406,14 @@ d3.csv("https://raw.githubusercontent.com/naveenkcb/naveenkcb.github.io/main/nar
 
 	// Add X axis label:
 	svg.append("text")
-		.attr("text-anchor", "end")
+		.attr("text-anchor", "middle")
 		.attr("x", width)
 		.attr("y", height + margin.top + 20)
 		.text("Fertility Rate (# of childs per woman)");
 
 	// Y axis label:
 	svg.append("text")
-		.attr("text-anchor", "end")
+		.attr("text-anchor", "middle")
 		.attr("transform", "rotate(-90)")
 		.attr("y", -margin.left+20)
 		.attr("x", -margin.top)
