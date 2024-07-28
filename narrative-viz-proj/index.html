@@ -55,10 +55,12 @@
 		<!-- Create a div where the graph will take place -->
 		<div id="scene1"></div>
 		<hr> 
+		
 		<div id="scene2"></div>
 		<hr> 
+		
 		<div id="scene3"></div>
-
+		<hr>
 
 		<script>
 		<!-- Scene 1 -->
@@ -227,20 +229,17 @@
 			//Read the data
 			d3.csv("https://raw.githubusercontent.com/naveenkcb/naveenkcb.github.io/main/narrative-viz-proj/world-data-2023.csv").then ( function(data) {
 			
-			// Add X axis
+			// define X axis
 			  var x3 = d3.scaleLinear()
 				.domain([0, 7])
 				.range([ 0, width3 ]);
-			  scene3.append("g")
-				.attr("transform", "translate(0," + height3 + ")")
-				.call(d3.axisBottom(x3));
 
-			  // Add Y axis
+
+			  // Define Y axis
 			  var y3 = d3.scaleLinear()
 				.domain([0, 100])
 				.range([ height3, 0]);
-			  scene3.append("g")
-				.call(d3.axisLeft(y3));
+
 
 
 
@@ -250,10 +249,10 @@
 				.data(data)
 				.enter()
 				.append("circle")
-				  .attr("cx", function (d) { return x3(d.Fertility_Rate);  } )
-				  .attr("cy", function (d) { return y3(d.Infant_mortality); } )
-				  //.attr("cx", d => x3(d["Fertility_Rate"]))
-				  //.attr("cy", d => y3(d["Infant_mortality"]))
+				  //.attr("cx", function (d) { return x3(d.Fertility_Rate);  } )
+				  //.attr("cy", function (d) { return y3(d.Infant_mortality); } )
+				  .attr("cx", (d) => x3(parseInt(d.Fertility_Rate)))
+				  .attr("cy", (d) => y3(parseInt(d.Infant_mortality)))
 				  .attr("r", 5)
 				  .style("fill", "#69b3a2")
 				  
@@ -271,6 +270,16 @@
 							.duration(500)
 							.style("opacity", 0);
 					});
+
+				// add x axis
+			scene3.append("g")
+				.attr("transform", "translate(0," + height3 + ")")
+				.call(d3.axisBottom(x3));
+
+				// add y axis
+			scene3.append("g")
+				.call(d3.axisLeft(y3));
+
 					
 			// Annotation
 			scene3.append('rect')
