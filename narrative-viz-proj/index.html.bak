@@ -5,7 +5,7 @@
 <script src="https://d3js.org/d3.v5.min.js"></script>
 
 <!-- Create a div where the graph will take place -->
-<div id="my_dataviz"></div>
+<div id="scene3"></div>
 
 <script>
 
@@ -15,7 +15,7 @@ var margin = {top: 10, right: 30, bottom: 30, left: 60},
     height = 400 - margin.top - margin.bottom;
 
 // append the svg object to the body of the page
-var svg = d3.select("#my_dataviz")
+var svg = d3.select("#scene3")
   .append("svg")
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
@@ -46,7 +46,8 @@ d3.csv("https://raw.githubusercontent.com/naveenkcb/naveenkcb.github.io/main/nar
   // Color scale: give me a specie name, I return a color
   var color = d3.scaleOrdinal()
     .domain(["Low", "Medium", "High" ])
-    .range([ "#440154ff", "#21908dff", "#fde725ff"])
+    //.range([ "#440154ff", "#21908dff", "#fde725ff"])
+	.range([ "cyan", "purple", "orange"])
 
   // Add dots
   svg.append('g')
@@ -58,6 +59,21 @@ d3.csv("https://raw.githubusercontent.com/naveenkcb/naveenkcb.github.io/main/nar
       .attr("cy", function (d) { return y(d.Infant_Mortality); } )
       .attr("r", 5)
       .style("fill", function (d) { return color(d.IMR_Severity) } )
+
+	// Add X axis label:
+	svg.append("text")
+		.attr("text-anchor", "end")
+		.attr("x", width)
+		.attr("y", height + margin.top + 20)
+		.text("Fertility Rate (# of childs per woman)");
+
+	// Y axis label:
+	svg.append("text")
+		.attr("text-anchor", "end")
+		.attr("transform", "rotate(-90)")
+		.attr("y", -margin.left+20)
+		.attr("x", -margin.top)
+		.text("Infant Mortality Rate (# of deaths per 1000 live births)")
 
 })
 

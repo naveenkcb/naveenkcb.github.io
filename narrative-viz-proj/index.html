@@ -1,11 +1,49 @@
 <!DOCTYPE html>
-<meta charset="utf-8">
+
+<html>
+
+	<head>
+		<title>Infant Mortality Rate</title>
+		<meta charset="utf-8">
+		<!-- Add styles -->
+		<link rel="stylesheet" type="text/css" href="index.css">
+	</head>
 
 <!-- Load d3.js -->
 <script src="https://d3js.org/d3.v5.min.js"></script>
 
-<!-- Create a div where the graph will take place -->
-<div id="my_dataviz"></div>
+
+	<body>
+	<h1 id="intro">Infant Mortality Rate in 2023</h1>
+    <div>
+        <span class="italic">By Naveen Baskaran - UIUC CS 416 - July 2024</span>
+        <hr>
+
+        <h4>
+            Infant mortality rate review for 2023.
+        </h4>
+        <ul>
+            <li>
+                <a href="#one" class="contents">Countries with higher IMR!</a>
+            </li>
+            <li>
+                <a href="#two" class="contents">Does a country's GDP have a direct correlation to IMR?</a>
+            </li>
+            <li>
+                <a href="#three" class="contents">Fertility rate impact?</a>
+            </li>
+        </ul>
+        <hr>
+
+    </div>
+	
+		<!-- Create a div where the graph will take place -->
+		<div id="scene1"></div>
+		<hr> 
+		<div id="scene2"></div>
+		<hr> 
+		<div id="scene3"></div>
+
 
 <script>
 
@@ -15,7 +53,7 @@ var margin = {top: 10, right: 30, bottom: 30, left: 60},
     height = 400 - margin.top - margin.bottom;
 
 // append the svg object to the body of the page
-var svg = d3.select("#my_dataviz")
+var svg = d3.select("#scene3")
   .append("svg")
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
@@ -60,6 +98,24 @@ d3.csv("https://raw.githubusercontent.com/naveenkcb/naveenkcb.github.io/main/nar
       .attr("r", 5)
       .style("fill", function (d) { return color(d.IMR_Severity) } )
 
+	// Add X axis label:
+	svg.append("text")
+		.attr("text-anchor", "end")
+		.attr("x", width)
+		.attr("y", height + margin.top + 20)
+		.text("Fertility Rate (# of childs per woman)");
+
+	// Y axis label:
+	svg.append("text")
+		.attr("text-anchor", "end")
+		.attr("transform", "rotate(-90)")
+		.attr("y", -margin.left+20)
+		.attr("x", -margin.top)
+		.text("Infant Mortality Rate (# of deaths per 1000 live births)")
+
 })
 
 </script>
+
+	</body>
+</html>
