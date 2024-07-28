@@ -55,9 +55,9 @@
     <a href="#one" class="back">Previous</a>
     <a href="#three" class="back">Next</a>
 	
-	<h2 id="two">Minimum Wage impact on the contry's Infant Mortality Rate?</h2>
+	<h2 id="two">Minimum Wage impact on the country's Infant Mortality Rate?</h2>
     <p>
-		In the below chart, the country's minimum wage is compared against the Infant Mortality Rate. Minimum Wage for a country is measured in PPP units which is a normalized global measure to counter across all currencies. It is very evident that the minimum wage has a positive impact in the sense that, as minimum wage is improved the Infant Moratlity rate tremendously comes down. Most of the countries are clustered around the Minimum wage less than 3 and their IMR is higher. As the Minimum wage rises, the IMR trends down.
+		In the below chart, the country's minimum wage is compared against the Infant Mortality Rate. Minimum Wage for a country is measured in PPP units which is a normalized global measure to counter across all currencies. It is very evident that the minimum wage has a positive impact in the sense that, as minimum wage is improved the Infant Mortality rate tremendously comes down. Most of the countries are clustered around the Minimum wage less than 3 and their IMR is higher. As the Minimum wage rises, the IMR trends down.
 	</p>
 	<p>
 		Considering IMR, Central African Republic is at the higher end of the spectrum with highest IMR and very low Minimum Wage. Corresponding Australia is at the other end with the least IMR and higher Minimum Wage. Though an interesting find is that countries like Cuba and Georgia have lower Minimum Wage but also lower IMR. Could the total population in these countries are lower and that is the reason? may be?
@@ -71,13 +71,14 @@
 	
 	<a href="#intro" class="back">Back to Top</a>
     <a href="#two" class="back">Previous</a>
-    <h2 id="three">What is the relationship between fuel type, number of engine cylinders and the mileage?</h2>
-    <p>This visualization shows us the relationship between all three fields: fuel type, engine cylinder, and average MPG. The size of the 
-        plotted point indicates the mileage, while the density represents the relative value of the cars that fall into that configuration of fuel type and
-        cylinder number.
+    <h2 id="three">What is the relationship between fertility rate and infant mortality?</h2>
+    <p>This visualization compares the fertility rate versus the infant mortality rate. Fertility rate is the ratio of live births in a year to the female population of childbearing age. It can be calculated for a specific age or age group, or for the entire population. From the chart we can see, those women who give births to 3 or less children result is lower infant deaths. As more children are given birth the probablity of infant death increases. Using color legends to further explore, we can see the higher IMR group of countries seems to have higher fertility rate and therby contributing to higher mortality rate. Drill down on each country to gain insight on additional data indicators.
     </p>
 	<div id="scene3"></div>
-
+	
+	<p> This slideshow attempts to give an brief insight into the couple of factors and related data indicators affecting Infant Mortality Rate. There is room for further exploration and more visualizations and interactions can be added to this story to deep dive further.
+	Thanks for reading this story !!!
+	</p>
 
 <!--- Scene1 --->
 
@@ -470,6 +471,7 @@ d3.csv("https://raw.githubusercontent.com/naveenkcb/naveenkcb.github.io/main/nar
     .data(data)
     .enter()
     .append("circle")
+	  .attr("class", "dot")
       .attr("cx", function (d) { return x(d.Fertility_Rate); } )
       .attr("cy", function (d) { return y(d.Infant_Mortality); } )
       .attr("r", 5)
@@ -495,7 +497,7 @@ d3.csv("https://raw.githubusercontent.com/naveenkcb/naveenkcb.github.io/main/nar
 	// Add X axis label:
 	svg.append("text")
 		.attr("text-anchor", "end")
-		.attr("x", width)
+		.attr("x", width - 200)
 		.attr("y", height + margin.top + 20)
 		.text("Fertility Rate (# of childs per woman)");
 
@@ -511,21 +513,65 @@ d3.csv("https://raw.githubusercontent.com/naveenkcb/naveenkcb.github.io/main/nar
 					
 			// Annotation
 			svg.append('rect')
-				.attr("x", 150)
+				.attr("x", 70)
 				.attr("y", 5)
-				.attr("width", 500)
+				.attr("width", 600)
 				.attr("height", 30)
 				.style("fill", 'lightblue')
 
 			svg.append('text')
-				.attr("x", 160)
+				.attr("x", 80)
 				.attr("y", 15)
 				.attr("width", 60)
 				.attr("height", 20)
 				.style("fill", 'red')
-				.text("Hover the mouse over each data point to see additional details.")
+				.text("Higher fertility rate contributes to increased infant deaths")
 				.attr("text-anchor", "left")
 				.style("alignment-baseline", "middle")
+
+	// Legend
+var size = 20
+scene3.selectAll("legend")
+    .data(keys_color)
+    .enter()
+    .append("rect")
+    .attr("x", 600)
+    .attr("y", function (d, i) { return 20 + i * (size + 5) })
+    .attr("width", size)
+    .attr("height", size)
+    .attr("stroke", "black")
+    .style("fill", function (d) { return color(d) })
+    .on("mouseover", function (d) { filterData3(d) })
+    .on("mouseleave", function (d) { filterDataOff3(d) })
+
+scene3.selectAll("labels")
+    .data(keys_color)
+    .enter()
+    .append("text")
+    .attr("x", 600 + size * 1.2)
+    .attr("y", function (d, i) { return 20 + i * (size + 5) + (size / 2) })
+    .style("fill", function (d) { return "black" })
+    .text(function (d) { return d })
+    .attr("text-anchor", "left")
+    .style("alignment-baseline", "middle")
+    .on("mouseover", function (d) { filterData3(d) })
+    .on("mouseleave", function (d) { filterDataOff3(d) })
+
+    function filterData3(d) {
+        scene3.selectAll('.dot')
+            .filter(function(data) {
+                return (data.IMR_Severity != d);
+            })
+            .transition()
+            .style('opacity', 0.05);
+    }
+
+    function filterDataOff3(d) {
+        scene3.selectAll('.dot')
+            .transition()
+            .style('opacity', 0.9);
+
+    }
 
 })
 
