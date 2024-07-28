@@ -74,6 +74,7 @@
     <h2 id="three">What is the relationship between fertility rate and infant mortality?</h2>
     <p>This visualization compares the fertility rate versus the infant mortality rate. Fertility rate is the ratio of live births in a year to the female population of childbearing age. It can be calculated for a specific age or age group, or for the entire population. From the chart we can see, those women who give births to 3 or less children result is lower infant deaths. As more children are given birth the probablity of infant death increases. Using color legends to further explore, we can see the higher IMR group of countries seems to have higher fertility rate and therby contributing to higher mortality rate. Drill down on each country to gain insight on additional data indicators.
     </p>
+	<p> Hover on the data points and also on the legends to explore further </p>
 	<div id="scene3"></div>
 	
 	<p> This slideshow attempts to give an brief insight into the couple of factors and related data indicators affecting Infant Mortality Rate. There is room for further exploration and more visualizations and interactions can be added to this story to deep dive further.
@@ -505,8 +506,8 @@ d3.csv("https://raw.githubusercontent.com/naveenkcb/naveenkcb.github.io/main/nar
 	svg.append("text")
 		.attr("text-anchor", "end")
 		.attr("transform", "rotate(-90)")
-		.attr("y", -margin.left+20)
 		.attr("x", -margin.top)
+		.attr("y", -margin.left+20)
 		.text("Infant Mortality Rate (# of deaths per 1000 live births)")
 	
 
@@ -515,13 +516,13 @@ d3.csv("https://raw.githubusercontent.com/naveenkcb/naveenkcb.github.io/main/nar
 			svg.append('rect')
 				.attr("x", 70)
 				.attr("y", 5)
-				.attr("width", 600)
+				.attr("width", 500)
 				.attr("height", 30)
 				.style("fill", 'lightblue')
 
 			svg.append('text')
 				.attr("x", 80)
-				.attr("y", 15)
+				.attr("y", 20)
 				.attr("width", 60)
 				.attr("height", 20)
 				.style("fill", 'red')
