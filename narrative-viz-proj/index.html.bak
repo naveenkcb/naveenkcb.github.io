@@ -135,27 +135,27 @@
 					.style("opacity", 0);
 					});
 					
-/*			// Animation
+			//Animation
 			scene1.selectAll("rect")
 			  .transition()
 			  .duration(800)
 			  .attr("y", function(d) { return y1(d.Infant_Mortality); })
 			  .attr("height", function(d) { return height - y1(d.Infant_Mortality); })
 			  .delay(function(d,i){ return(i*100) })
-*/
+
 
 	// Add X axis label:
 	scene1.append("text")
 		.attr("text-anchor", "end")
 		.attr("x", width)
-		.attr("y", height + margin.top + 190)
+		.attr("y", height + margin.top + 200)
 		.text("Country");
 		
 	// Y axis label:
 	scene1.append("text")
 		.attr("text-anchor", "end")
 		.attr("transform", "rotate(-90)")
-		.attr("y", -margin.left+80)
+		.attr("y", -margin.left+60)
 		.attr("x", -margin.top)
 		.text("Infant Mortality Rate");
 

@@ -124,7 +124,9 @@
 						bar_tooltip.transition()
 					.duration(200)
 					.style("opacity", .9);
-					bar_tooltip.html("Country: " + d.Country + " , " + "Infant Mortality: " + d.Infant_Mortality)
+					//bar_tooltip.html("Country: " + d.Country + " , " + "Infant Mortality: " + d.Infant_Mortality)
+					bar_tooltip.html("<b>Country:</b> " + d.Country + '<br>' +
+									 "<b>Infant Mortality:</b> " + d.Country")
 						.style("left", (d3.event.pageX) + "px")
 						.style("top", (d3.event.pageY - 28) + "px");
 					})
@@ -148,14 +150,14 @@
 	scene1.append("text")
 		.attr("text-anchor", "end")
 		.attr("x", width)
-		.attr("y", height + margin.top + 190)
+		.attr("y", height + margin.top + 200)
 		.text("Country");
 		
 	// Y axis label:
 	scene1.append("text")
 		.attr("text-anchor", "end")
 		.attr("transform", "rotate(-90)")
-		.attr("y", -margin.left+80)
+		.attr("y", -margin.left+60)
 		.attr("x", -margin.top)
 		.text("Infant Mortality Rate");
 
