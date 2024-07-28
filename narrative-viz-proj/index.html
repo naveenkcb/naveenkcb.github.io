@@ -52,7 +52,7 @@
 		<!-- Scene 1 -->
 
 		// set the dimensions and margins of the graph
-		const margin1 = {top: 30, right: 30, bottom: 200, left: 110},
+		const margin1 = {top: 30, right: 30, bottom: 200, left: 130},
 			width1 = 4000 - margin1.left - margin1.right,
 			height1 = 700 - margin1.top - margin1.bottom;
 
@@ -97,7 +97,6 @@
 		  keys_color = ["Low", "Medium", "High" ]
 		  var color1 = d3.scaleOrdinal(keys_color)
 			.domain(["Low", "Medium", "High" ])
-			//.range([ "#440154ff", "#21908dff", "#fde725ff"])
 			.range([ "cyan", "purple", "orange"])
 		
 		//define tool tip properties
@@ -141,58 +140,51 @@
 					.style("opacity", 0);
 					});
 					
-			//Animation
-/*			scene1.selectAll("rect")
-			  .transition()
-			  .duration(800)
-			  .attr("y", function(d) { return y1(d.Infant_Mortality); })
-			  .attr("height", function(d) { return height - y1(d.Infant_Mortality); })
-			  .delay(function(d,i){ return(i*100) })
-*/
 
 	// Add X axis label:
 	scene1.append("text")
-		.attr("text-anchor", "end")
-		.attr("x", width)
-		.attr("y", height + margin.top + 195)
+		.attr("text-anchor", "middle")
+		.attr("x", width1)
+		.attr("y", height1 + margin1.top + 20)
 		.text("Country");
 		
 	// Y axis label:
 	scene1.append("text")
-		.attr("text-anchor", "end")
+		.attr("text-anchor", "middle")
 		.attr("transform", "rotate(-90)")
-		.attr("y", -margin.left+60)
-		.attr("x", -margin.top)
+		.attr("y", -margin1.left+20)
+		.attr("x", -margin1.top)
 		.text("Infant Mortality Rate");
 
 
-	// Legend
-var size = 20
-scene1.selectAll("legend")
-    .data(keys_color)
-    .enter()
-    .append("rect")
-    .attr("x", 500)
-    .attr("y", function (d, i) { return 20 + i * (size + 5) })
-    .attr("width", size)
-    .attr("height", size)
-    .attr("stroke", "black")
-    .style("fill", function (d) { return color1(d) })
-    .on("mouseover", function (d) { filterData(d) })
-    .on("mouseleave", function (d) { filterDataOff(d) })
+	// Add Legend
+	
+	var size = 20
+	scene1.selectAll("legend")
+		.data(keys_color)
+		.enter()
+		.append("rect")
+		.attr("x", 500)
+		.attr("y", function (d, i) { return 20 + i * (size + 5) })
+		.attr("width", size)
+		.attr("height", size)
+		.attr("stroke", "black")
+		.style("fill", function (d) { return color1(d) })
+		.on("mouseover", function (d) { filterData(d) })
+		.on("mouseleave", function (d) { filterDataOff(d) })
 
-scene1.selectAll("labels")
-    .data(keys_color)
-    .enter()
-    .append("text")
-    .attr("x", 500 + size * 1.2)
-    .attr("y", function (d, i) { return 20 + i * (size + 5) + (size / 2) })
-    .style("fill", function (d) { return "black" })
-    .text(function (d) { return d })
-    .attr("text-anchor", "left")
-    .style("alignment-baseline", "middle")
- /*   .on("mouseover", filterData)
-    .on("mouseleave", filterDataOff)  */
+	scene1.selectAll("labels")
+		.data(keys_color)
+		.enter()
+		.append("text")
+		.attr("x", 500 + size * 1.2)
+		.attr("y", function (d, i) { return 20 + i * (size + 5) + (size / 2) })
+		.style("fill", function (d) { return "black" })
+		.text(function (d) { return d })
+		.attr("text-anchor", "left")
+		.style("alignment-baseline", "middle")
+		.on("mouseover", function (d) { filterData(d) })
+		.on("mouseleave", function (d) { filterDataOff(d) }) 
 
     function filterData(d) {
         scene1.selectAll('.mybar')
@@ -201,23 +193,12 @@ scene1.selectAll("labels")
             })
             .transition()
             .style('opacity', 0.05);
-
-/*        scene1.selectAll('.datapoints')
-            .filter(function(data) {
-                return (data.IMR_Severity != d);
-            })
-            .transition()
-            .style('opacity', 0.05);  */
     }
 
     function filterDataOff(d) {
         scene1.selectAll('.mybar')
             .transition()
             .style('opacity', 0.9);
-
-/*        scene1.selectAll('.datapoints')
-            .transition()
-            .style('opacity', 0.8); */
     }
 
 })	
@@ -316,17 +297,17 @@ d3.csv("https://raw.githubusercontent.com/naveenkcb/naveenkcb.github.io/main/nar
 
 	// Add X axis label:
 	scene2.append("text")
-		.attr("text-anchor", "end")
-		.attr("x", width)
-		.attr("y", height + margin.top + 20)
+		.attr("text-anchor", "middle")
+		.attr("x", width2)
+		.attr("y", height2 + margin2.top + 20)
 		.text("Minimum Wage");
 
 	// Y axis label:
 	scene2.append("text")
-		.attr("text-anchor", "end")
+		.attr("text-anchor", "middle")
 		.attr("transform", "rotate(-90)")
-		.attr("y", -margin.left+20)
-		.attr("x", -margin.top)
+		.attr("y", -margin2.left + 20)
+		.attr("x", -margin2.top)
 		.text("Infant Mortality Rate (# of deaths per 1000 live births)")
 
 })
@@ -425,14 +406,14 @@ d3.csv("https://raw.githubusercontent.com/naveenkcb/naveenkcb.github.io/main/nar
 
 	// Add X axis label:
 	svg.append("text")
-		.attr("text-anchor", "end")
+		.attr("text-anchor", "middle")
 		.attr("x", width)
 		.attr("y", height + margin.top + 20)
 		.text("Fertility Rate (# of childs per woman)");
 
 	// Y axis label:
 	svg.append("text")
-		.attr("text-anchor", "end")
+		.attr("text-anchor", "middle")
 		.attr("transform", "rotate(-90)")
 		.attr("y", -margin.left+20)
 		.attr("x", -margin.top)
