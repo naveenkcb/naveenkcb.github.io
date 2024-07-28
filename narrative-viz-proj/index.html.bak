@@ -65,7 +65,7 @@
 			.attr("transform", `translate(${margin1.left}, ${margin1.top})`);
 
 		// Parse the Data
-		d3.csv("https://raw.githubusercontent.com/naveenkcb/naveenkcb.github.io/main/narrative-viz-proj/world-data-2023.csv").then ( function(data) {
+		d3.csv("https://raw.githubusercontent.com/naveenkcb/naveenkcb.github.io/main/narrative-viz-proj/world-data-2023-cleaned-3.csv").then ( function(data) {
 
 		  // sort data
 		/*  data.sort(function(b, a) {
@@ -104,12 +104,26 @@
 			.data(data)
 			.enter()
 			.append("rect")
-			  .attr("x", d => x1(d.Country))
-			  .attr("y", d => y1(d.Infant_Mortality))
-			  .attr("width", x1.bandwidth())
-			  .attr("height", d => height - y1(d.Infant_Mortality))
-			  .attr("fill", function(d) { return color1(d.IMR_Severity) })
-
+			    .attr("x", d => x1(d.Country))
+			    .attr("y", d => y1(d.Infant_Mortality))
+			    .attr("width", x1.bandwidth())
+			    .attr("height", d => height - y1(d.Infant_Mortality))
+			    .attr("fill", function(d) { return color1(d.IMR_Severity) })
+				.on("mouseover", function (d) {
+						bar_tooltip.transition()
+					.duration(200)
+					.style("opacity", .9);
+					bar_tooltip.html("Country: " + d.Country + " , " + "Infant Mortality: " + d.Infant_Mortality)
+						.style("left", (d3.event.pageX) + "px")
+						.style("top", (d3.event.pageY - 28) + "px");
+					})
+						
+				.on("mouseout", function (d) {
+					scatter_tooltip2.transition()
+					.duration(500)
+					.style("opacity", 0);
+					});
+					
 /*			// Animation
 			scene1.selectAll("rect")
 			  .transition()
@@ -118,7 +132,37 @@
 			  .attr("height", function(d) { return height - y1(d.Infant_Mortality); })
 			  .delay(function(d,i){ return(i*100) })
 */
-		})
+
+	// Add X axis label:
+	scene1.append("text")
+		.attr("text-anchor", "end")
+		.attr("x", width)
+		.attr("y", height + margin.top + 20)
+		.text("Infant Mortality Rate");
+
+	// Y axis label:
+	scene1.append("text")
+		.attr("text-anchor", "end")
+		.attr("transform", "rotate(-90)")
+		.attr("y", -margin.left+20)
+		.attr("x", -margin.top)
+		.text("Country")
+
+
+		var bar_tooltip = d3.select("body")
+				.append("div")
+				.append("div")
+				.style("opacity", 0)
+				.attr("class", "tooltip")
+				.style("background-color", "black")
+				.style("border-radius", "15px")
+				.style("padding", "8px")
+				.style("color", "white")
+		
+
+
+
+})	
 </script>
 
 
