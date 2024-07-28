@@ -22,7 +22,7 @@
 
         <h3>
             Infant mortality rate (IMR) is the probability of a child dying before their first birthday, expressed as the number of infant deaths per 1,000 live births. It's a key indicator of a society's overall health because many factors that contribute to infant deaths also affect the health of the entire population.There are many factors that contribute to the IMR though we will drill down
-			into a couple of economic data indicators and whether it positively or negavtively impacts the Infant Mortality Rate. Let's dive in !!!
+			into a couple of economic data indicators and whether it positively or negatively impacts the Infant Mortality Rate. Let's dive in !!!
         </h3>
         <ul>
             <li>
@@ -52,11 +52,15 @@
     <a href="#one" class="back">Previous</a>
     <a href="#three" class="back">Next</a>
 	
-	<h2 id="two">Minimum wage impact on the contry's IMR?</h2>
+	<h2 id="two">Minimum Wage impact on the contry's Infant Mortality Rate?</h2>
     <p>
-		Select the legends which has 3 groupings indicating a scale of low to high infant mortality distribution. Each group is identified by 
-		its own color. Hover over each legend to see those specific countries highlighted. Additionally, hovering over each data point gives 
-		additional data about the country
+		In the below chart, the country's minimum wage is compared against the Infant Mortality Rate. Minimum Wage for a country is measured in PPP units which is a normalized global measure to counter across all currencies. It is very evident that the minimum wage has a positive impact in the sense that, as minimum wage is improved the Infant Moratlity rate tremendously comes down. Most of the countries are clustered around the Minimum wage less than 3 and their IMR is higher. As the Minimum wage rises, the IMR trends down.
+	</p>
+	<p>
+		Considering IMR, Central African Republic is at the higher end of the spectrum with highest IMR and very low Minimum Wage. Corresponding Australia is at the other end with the least IMR and higher Minimum Wage. Though an interesting find is that countries like Cuba and Georgia have lower Minimum Wage but also lower IMR. Could the total population in these countries are lower and that is the reason? may be?
+	</p>
+	<p>
+		Further explorations and interesting fact finding can be done by selecting the legends which has 3 groupings on a scale of low to high infant mortality distribution. Each group is identified by its own color. Additionally, hovering over each data point gives additional data about the country. 
     </p>
 	<div id="scene2"></div>
 	
@@ -217,8 +221,8 @@ scene1.selectAll("labels")
     .text(function (d) { return d })
     .attr("text-anchor", "left")
     .style("alignment-baseline", "middle")
- /*   .on("mouseover", filterData)
-    .on("mouseleave", filterDataOff)  */
+    .on("mouseover", function (d) { filterData(d) })
+    .on("mouseleave", function (d) { filterDataOff(d) })
 
     function filterData(d) {
         scene1.selectAll('.mybar')
@@ -227,23 +231,12 @@ scene1.selectAll("labels")
             })
             .transition()
             .style('opacity', 0.05);
-
-/*        scene1.selectAll('.datapoints')
-            .filter(function(data) {
-                return (data.IMR_Severity != d);
-            })
-            .transition()
-            .style('opacity', 0.05);  */
     }
 
     function filterDataOff(d) {
         scene1.selectAll('.mybar')
             .transition()
             .style('opacity', 0.9);
-
-/*        scene1.selectAll('.datapoints')
-            .transition()
-            .style('opacity', 0.8); */
     }
 
 })	
@@ -363,7 +356,7 @@ scene2.selectAll("legend")
     .data(keys_color)
     .enter()
     .append("rect")
-    .attr("x", 500)
+    .attr("x", 600)
     .attr("y", function (d, i) { return 20 + i * (size + 5) })
     .attr("width", size)
     .attr("height", size)
@@ -376,7 +369,7 @@ scene2.selectAll("labels")
     .data(keys_color)
     .enter()
     .append("text")
-    .attr("x", 500 + size * 1.2)
+    .attr("x", 600 + size * 1.2)
     .attr("y", function (d, i) { return 20 + i * (size + 5) + (size / 2) })
     .style("fill", function (d) { return "black" })
     .text(function (d) { return d })
