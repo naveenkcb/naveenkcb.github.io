@@ -52,7 +52,7 @@
 		<!-- Scene 1 -->
 
 		// set the dimensions and margins of the graph
-		const margin1 = {top: 30, right: 30, bottom: 200, left: 90},
+		const margin1 = {top: 30, right: 30, bottom: 200, left: 100},
 			width1 = 4000 - margin1.left - margin1.right,
 			height1 = 700 - margin1.top - margin1.bottom;
 
@@ -161,7 +161,7 @@
 		.attr("text-anchor", "end")
 		.attr("transform", "rotate(-90)")
 		.attr("y", -margin.left+60)
-		.attr("x", -margin.top)
+		.attr("x", -margin.top-30)
 		.text("Infant Mortality Rate");
 
 
@@ -171,14 +171,28 @@ scene1.selectAll("legend")
     .data(keys_color)
     .enter()
     .append("rect")
-    .attr("x", 100)
-    .attr("y", function (d, i) { return 200 + i * (size + 5) })
+    .attr("x", 300)
+    .attr("y", function (d, i) { return 50 + i * (size + 5) })
     .attr("width", size)
     .attr("height", size)
     .attr("stroke", "black")
     .style("fill", function (d) { return color1(d) })
     .on("mouseover", function (d) { filterData(d) })
     .on("mouseleave", function (d) { filterDataOff(d) })
+
+scene1.selectAll("labels")
+    .data(keys_color)
+    .enter()
+    .append("text")
+    .attr("x", 300 + size * 1.2)
+    .attr("y", function (d, i) { return 50 + i * (size + 5) + (size / 2) })
+    .style("fill", function (d) { return "black" })
+    .text(function (d) { return d })
+    .attr("text-anchor", "left")
+    .style("alignment-baseline", "middle")
+    .on("mouseover", filterData)
+    .on("mouseleave", filterDataOff)
+
 
 
     function filterData(d) {

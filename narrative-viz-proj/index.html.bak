@@ -94,7 +94,8 @@
 			.call(d3.axisLeft(y1));
 
 		  // Color scale: give me a IMR severity level, I return a color
-		  var color1 = d3.scaleOrdinal()
+		  keys_color = ["Low", "Medium", "High" ]
+		  var color1 = d3.scaleOrdinal(keys_color)
 			.domain(["Low", "Medium", "High" ])
 			//.range([ "#440154ff", "#21908dff", "#fde725ff"])
 			.range([ "cyan", "purple", "orange"])
@@ -160,8 +161,65 @@
 		.attr("text-anchor", "end")
 		.attr("transform", "rotate(-90)")
 		.attr("y", -margin.left+60)
-		.attr("x", -margin.top)
+		.attr("x", -margin.top-30)
 		.text("Infant Mortality Rate");
+
+
+	// Legend
+var size = 20
+scene1.selectAll("legend")
+    .data(keys_color)
+    .enter()
+    .append("rect")
+    .attr("x", 300)
+    .attr("y", function (d, i) { return 50 + i * (size + 5) })
+    .attr("width", size)
+    .attr("height", size)
+    .attr("stroke", "black")
+    .style("fill", function (d) { return color1(d) })
+    .on("mouseover", function (d) { filterData(d) })
+    .on("mouseleave", function (d) { filterDataOff(d) })
+
+scene1.selectAll("labels")
+    .data(keys_color)
+    .enter()
+    .append("text")
+    .attr("x", 300 + size * 1.2)
+    .attr("y", function (d, i) { return 50 + i * (size + 5) + (size / 2) })
+    .style("fill", function (d) { return "black" })
+    .text(function (d) { return d })
+    .attr("text-anchor", "left")
+    .style("alignment-baseline", "middle")
+    .on("mouseover", filterData)
+    .on("mouseleave", filterDataOff)
+
+
+
+    function filterData(d) {
+        svg.selectAll('.bar')
+            .filter(function(data) {
+                return (data.IMR_Severity != d);
+            })
+            .transition()
+            .style('opacity', 0.05);
+
+        svg.selectAll('.datapoints')
+            .filter(function(data) {
+                return (data.IMR_Severity != d);
+            })
+            .transition()
+            .style('opacity', 0.05);
+    }
+
+    function filterDataOff(d) {
+        svg.selectAll('.bar')
+            .transition()
+            .style('opacity', 0.8);
+
+        svg.selectAll('.datapoints')
+            .transition()
+            .style('opacity', 0.8);
+    }
 
 })	
 </script>
