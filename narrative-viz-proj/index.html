@@ -2,7 +2,7 @@
 <html>
 
 	<head>
-		<title>Infant Mortality Review</title>
+		<title>Infant Mortality Rate</title>
 		<meta charset="utf-8">
 		<!-- Load d3.js -->
 		<script src="https://d3js.org/d3.v5.min.js"></script>
@@ -13,6 +13,29 @@
 	</head>
 
 	<body>
+	<h1 id="intro">Infant Mortality Rate in 2023</h1>
+    <div>
+        <span class="italic">By Naveen Baskaran - UIUC CS 416 - July 2024</span>
+        <hr>
+
+        <h4>
+            Infant mortality rate review for 2023.
+        </h4>
+        <ul>
+            <li>
+                <a href="#one" class="contents">Countries with higher IMR!</a>
+            </li>
+            <li>
+                <a href="#two" class="contents">Does a country's GDP have a direct correlation to IMR?</a>
+            </li>
+            <li>
+                <a href="#three" class="contents">Fertility rate impact?</a>
+            </li>
+        </ul>
+        <hr>
+
+    </div>
+	
 		<!-- Create a div where the graph will take place -->
 		<div id="scene1"></div>
 		<hr> 
@@ -29,8 +52,8 @@
 			width = 4000 - margin.left - margin.right,
 			height = 700 - margin.top - margin.bottom;
 
-		// append the svg object to the body of the page
-		const svg = d3.select("#scene1")
+		// Define Scene1 and append the svg canvas object to the body of the page
+		const scene1= d3.select("#scene1")
 		  .append("svg")
 			.attr("width", width + margin.left + margin.right)
 			.attr("height", height + margin.top + margin.bottom)
@@ -45,12 +68,13 @@
 			return a.Value - b.Value;
 		  });
 
-		  // X axis
+		  // Add X axis
 		  const x = d3.scaleBand()
 			.range([ 0, width ])
 			.domain(data.map(d => d.Country))
 			.padding(0.2);
-		  svg.append("g")
+			
+		  scene1.append("g")
 			.attr("transform", `translate(0, ${height})`)
 			.call(d3.axisBottom(x))
 			.selectAll("text")
@@ -61,11 +85,12 @@
 		  const y = d3.scaleLinear()
 			.domain([0, 100])
 			.range([ height, 0]);
-		  svg.append("g")
+			
+		  scene1.append("g")
 			.call(d3.axisLeft(y));
 
-		  // Bars
-		  svg.selectAll("mybar")
+		  // Add Bars
+		  scene1.selectAll("mybar")
 			.data(data)
 			.enter()
 			.append("rect")
@@ -77,7 +102,7 @@
 			  .attr("fill", "green")
 
 			// Animation
-			svg.selectAll("rect")
+			scene1.selectAll("rect")
 			  .transition()
 			  .duration(800)
 			  .attr("y", function(d) { return y(d.Infant_mortality); })
@@ -97,7 +122,7 @@
 			height2 = 400 - margin2.top - margin2.bottom;
 
 		// append the svg object to the body of the page
-		var svg2 = d3.select("#scene2")
+		var scene2 = d3.select("#scene2")
 		  .append("svg")
 			.attr("width", width2 + margin2.left + margin2.right)
 			.attr("height", height2 + margin2.top + margin2.bottom)
@@ -106,14 +131,14 @@
 				  "translate(" + margin2.left + "," + margin2.top + ")");
 
 		//Read the data
-		//d3.csv("https://raw.githubusercontent.com/holtzy/data_to_viz/master/Example_dataset/2_TwoNum.csv", function(data) {
 		d3.csv("https://raw.githubusercontent.com/naveenkcb/naveenkcb.github.io/main/narrative-viz-proj/world-data-2023.csv").then ( function(data) {
+		  
 		  // Add X axis
 		  var x2 = d3.scaleLog()
 			.domain([0, 21428000000000])
 			.range([ 0, width2 ])
 			.base(10);
-		  svg2.append("g")
+		  scene2.append("g")
 			.attr("transform", "translate(0," + height2 + ")")
 			.call(d3.axisBottom(x2)
 				//.tickValues([10, 10000000, 1000000000, 10000000000, 100000000000000])
@@ -125,11 +150,11 @@
 		  var y2 = d3.scaleLinear()
 			.domain([0, 100])
 			.range([ height2, 0]);
-		  svg2.append("g")
+		  scene2.append("g")
 			.call(d3.axisLeft(y2));
 
 		  // Add dots
-		  svg2.append('g')
+		  scene2.append('g')
 			.selectAll("dot")
 			.data(data)
 			.enter()
@@ -154,7 +179,7 @@
 				height3 = 400 - margin3.top - margin3.bottom;
 
 			// append the svg object to the body of the page
-			var svg3 = d3.select("#scene3")
+			var scene3 = d3.select("#scene3")
 			  .append("svg")
 				.attr("width", width3 + margin3.left + margin3.right)
 				.attr("height", height3 + margin3.top + margin3.bottom)
@@ -169,7 +194,7 @@
 			  var x3 = d3.scaleLinear()
 				.domain([0, 7])
 				.range([ 0, width3 ]);
-			  svg3.append("g")
+			  scene3.append("g")
 				.attr("transform", "translate(0," + height3 + ")")
 				.call(d3.axisBottom(x3));
 
@@ -177,11 +202,11 @@
 			  var y3 = d3.scaleLinear()
 				.domain([0, 100])
 				.range([ height3, 0]);
-			  svg3.append("g")
+			  scene3.append("g")
 				.call(d3.axisLeft(y3));
 
 			  // Add dots
-			  svg3.append('g')
+			  scene3.append('g')
 				.selectAll("dot")
 				.data(data)
 				.enter()
