@@ -21,17 +21,17 @@
         <hr>
 
         <h4>
-            Infant mortality rate review for 2023.
+            Infant mortality rate review for 2023
         </h4>
         <ul>
             <li>
-                <a href="#one" class="contents">Countries with higher IMR!</a>
+                <a href="#one" class="contents">Overview of Countries with Infamt Mortality Rates that are alrming</a>
             </li>
             <li>
-                <a href="#two" class="contents">Does a country's GDP have a direct correlation to IMR?</a>
+                <a href="#two" class="contents">Does a country's Minimum Wage earnings have a direct correlation to IMR?</a>
             </li>
             <li>
-                <a href="#three" class="contents">Fertility rate impact?</a>
+                <a href="#three" class="contents">Does the women's Fertility rate for that country have any impact?</a>
             </li>
         </ul>
         <hr>
@@ -133,6 +133,21 @@ d3.csv("https://raw.githubusercontent.com/naveenkcb/naveenkcb.github.io/main/nar
 					.style("opacity", 0);
 				});
 
+
+	// Add X axis label:
+	scene2.append("text")
+		.attr("text-anchor", "end")
+		.attr("x", width)
+		.attr("y", height + margin.top + 20)
+		.text("Minimum Wage");
+
+	// Y axis label:
+	sscene2.append("text")
+		.attr("text-anchor", "end")
+		.attr("transform", "rotate(-90)")
+		.attr("y", -margin.left+20)
+		.attr("x", -margin.top)
+		.text("Infant Mortality Rate (# of deaths per 1000 live births)")
 
 })
 </script>
