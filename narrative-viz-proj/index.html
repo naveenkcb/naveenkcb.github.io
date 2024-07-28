@@ -161,7 +161,7 @@
 		.attr("text-anchor", "end")
 		.attr("transform", "rotate(-90)")
 		.attr("y", -margin.left+60)
-		.attr("x", -margin.top-60)
+		.attr("x", -margin.top)
 		.text("Infant Mortality Rate");
 
 
@@ -196,23 +196,23 @@ scene1.selectAll("labels")
 
 
     function filterData(d) {
-        scene1.selectAll('.bar')
+        scene1.selectAll('.mybar')
             .filter(function(data) {
-                return (data.IMR_Severity != d);
+                return (data.IMR_Severity != data);
             })
             .transition()
             .style('opacity', 0.05);
 
         scene1.selectAll('.datapoints')
             .filter(function(data) {
-                return (data.IMR_Severity != d);
+                return (data.IMR_Severity != data);
             })
             .transition()
             .style('opacity', 0.05);
     }
 
     function filterDataOff(d) {
-        scene1.selectAll('.bar')
+        scene1.selectAll('.mybar')
             .transition()
             .style('opacity', 0.8);
 
