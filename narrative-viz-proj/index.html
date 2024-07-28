@@ -52,7 +52,7 @@
 		<!-- Scene 1 -->
 
 		// set the dimensions and margins of the graph
-		const margin1 = {top: 30, right: 30, bottom: 200, left: 100},
+		const margin1 = {top: 30, right: 30, bottom: 200, left: 110},
 			width1 = 4000 - margin1.left - margin1.right,
 			height1 = 700 - margin1.top - margin1.bottom;
 
@@ -161,7 +161,7 @@
 		.attr("text-anchor", "end")
 		.attr("transform", "rotate(-90)")
 		.attr("y", -margin.left+60)
-		.attr("x", -margin.top-30)
+		.attr("x", -margin.top-60)
 		.text("Infant Mortality Rate");
 
 
@@ -171,8 +171,8 @@ scene1.selectAll("legend")
     .data(keys_color)
     .enter()
     .append("rect")
-    .attr("x", 300)
-    .attr("y", function (d, i) { return 50 + i * (size + 5) })
+    .attr("x", 500)
+    .attr("y", function (d, i) { return 20 + i * (size + 5) })
     .attr("width", size)
     .attr("height", size)
     .attr("stroke", "black")
@@ -196,14 +196,14 @@ scene1.selectAll("labels")
 
 
     function filterData(d) {
-        svg.selectAll('.bar')
+        scene1.selectAll('.bar')
             .filter(function(data) {
                 return (data.IMR_Severity != d);
             })
             .transition()
             .style('opacity', 0.05);
 
-        svg.selectAll('.datapoints')
+        scene1.selectAll('.datapoints')
             .filter(function(data) {
                 return (data.IMR_Severity != d);
             })
@@ -212,11 +212,11 @@ scene1.selectAll("labels")
     }
 
     function filterDataOff(d) {
-        svg.selectAll('.bar')
+        scene1.selectAll('.bar')
             .transition()
             .style('opacity', 0.8);
 
-        svg.selectAll('.datapoints')
+        scene1.selectAll('.datapoints')
             .transition()
             .style('opacity', 0.8);
     }
