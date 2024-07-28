@@ -20,18 +20,19 @@
         <span class="italic">By Naveen Baskaran - UIUC CS 416 - July 2024</span>
         <hr>
 
-        <h4>
-            Infant mortality rate review for 2023
-        </h4>
+        <h3>
+            Infant mortality rate (IMR) is the probability of a child dying before their first birthday, expressed as the number of infant deaths per 1,000 live births. It's a key indicator of a society's overall health because many factors that contribute to infant deaths also affect the health of the entire population.There are many factors that contribute to the IMR though we will drill down
+			into a couple of economic data indicators and whether it positively or negavtively impacts the Infant Mortality Rate. Let's dive in !!!
+        </h3>
         <ul>
             <li>
-                <a href="#one" class="contents">Overview of Countries with Infant Mortality Rates that are alarming</a>
+                <a href="#one" class="contents">Overview of Countries and their Infant Mortality Rate</a>
             </li>
             <li>
-                <a href="#two" class="contents">Does a country's Minimum Wage earnings have a correlation to IMR?</a>
+                <a href="#two" class="contents">Does a country's minimum wage earnings have a correlation to it's Infant Mortality Rate?</a>
             </li>
             <li>
-                <a href="#three" class="contents">Does the women's Fertility rate for that country have any impact?</a>
+                <a href="#three" class="contents">Do we need to carefully consider Women's fertility rate?</a>
             </li>
         </ul>
         <hr>
@@ -39,6 +40,9 @@
     </div>
 	
 	<a href="#two" class="back">Next</a>
+	
+	<h2 id="one">Which countries have high infant mortality rate?</h2>
+	<p>Get a overview about those countries where the infant moratlity rate(IMR) is higher or lower. Click on each of the legends to explore each specific grouping. The  "Low" group indicates those countries with IMR less than 30, "Medium" group covers for IMR between 30 and 55 and remaining IMR falls into the "High" group. The interesting fact is that Nigeria and Pakistan GDP seems moderately good but the IMR is higher in those regions. Higher GDP alone is not sufficient to limit or eradicate a country's IMR. Further exploration will uncover more intesrting find from this bar chart. </p>
 	<!-- Create a div where the graph will take place -->
 	<div id="scene1"></div>
 	
@@ -313,6 +317,7 @@ d3.csv("https://raw.githubusercontent.com/naveenkcb/naveenkcb.github.io/main/nar
     .data(data)
     .enter()
     .append("circle")
+	  .attr("class", "dot")
       .attr("cx", function (d) { return x2(d.Minimum_Wage); } )
       .attr("cy", function (d) { return y2(d.Infant_Mortality); } )
       .attr("r", 5)
@@ -350,6 +355,52 @@ d3.csv("https://raw.githubusercontent.com/naveenkcb/naveenkcb.github.io/main/nar
 		.attr("y", -margin.left+20)
 		.attr("x", -margin.top)
 		.text("Infant Mortality Rate (# of deaths per 1000 live births)")
+
+
+	// Legend
+var size = 20
+scene2.selectAll("legend")
+    .data(keys_color)
+    .enter()
+    .append("rect")
+    .attr("x", 500)
+    .attr("y", function (d, i) { return 20 + i * (size + 5) })
+    .attr("width", size)
+    .attr("height", size)
+    .attr("stroke", "black")
+    .style("fill", function (d) { return color2(d) })
+    .on("mouseover", function (d) { filterData2(d) })
+    .on("mouseleave", function (d) { filterDataOff2(d) })
+
+scene2.selectAll("labels")
+    .data(keys_color)
+    .enter()
+    .append("text")
+    .attr("x", 500 + size * 1.2)
+    .attr("y", function (d, i) { return 20 + i * (size + 5) + (size / 2) })
+    .style("fill", function (d) { return "black" })
+    .text(function (d) { return d })
+    .attr("text-anchor", "left")
+    .style("alignment-baseline", "middle")
+    .on("mouseover", function (d) { filterData2(d) })
+    .on("mouseleave", function (d) { filterDataOff2(d) })
+
+    function filterData2(d) {
+        scene2.selectAll('.dot')
+            .filter(function(data) {
+                return (data.IMR_Severity != d);
+            })
+            .transition()
+            .style('opacity', 0.05);
+    }
+
+    function filterDataOff2(d) {
+        scene2.selectAll('.dot')
+            .transition()
+            .style('opacity', 0.9);
+
+    }
+
 
 })
 </script>
