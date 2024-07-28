@@ -8,47 +8,44 @@
 </head>
 
 <body onload="load1(); load2(); load3();">
-    <h1 id="intro">Infant Mortality Rate in 2023</h1>
+    <h1 id="intro">Fuel Efficiency of Automobiles in 2017</h1>
     <div>
-        <span class="italic">By Naveen Baskaran - UIUC CS 416 - July 2024</span>
+        <span class="italic">By Amrutha Gujjar - UIUC CS 498 - July 2020</span>
         <hr>
-		<!-- Begin page content -->
-        <!--- img src="car.png" alt="car" width="240" height="120" -->
-        <h4>
-            Infant mortality rate review for 2023.
-        </h4>
+        <img src="car.png" alt="car" width="240" height="120">
+        <h3>
+            Given the increasing effects of climate change, and the high volume of automobiles in the world, we must seek to better understand
+            the mileages of various automobiles. There are many factors that can affect the mileage of your car (See:
+            <a href="https://www.fueleconomy.gov/feg/factors.shtml#:~:text=Vehicle%20Maintenance,older%20cars%20with%20carbureted%20engines.">Link</a>) but in this interactive visualization, we will explore 2017 data about the the respective highway and
+            city MPGs of automobiles, with respect to just a few of these factors, like engine cylinders, fuel type and the
+            make of the vehicle.
+        </h3>
         <ul>
             <li>
-                <a href="#one" class="contents">countries with higher IMR!</a>
+                <a href="#one" class="contents">Which car brands will get you good mileage?</a>
             </li>
             <li>
-                <a href="#two" class="contents">Does a country's GDP have a direct correlation to IMR?</a>
+                <a href="#two" class="contents">Do Engine Cylinders Affect Mileage?</a>
             </li>
             <li>
-                <a href="#three" class="contents">Fertility rate impact?</a>
+                <a href="#three" class="contents">What is the relationship between fuel type, number of engine cylinders and the mileage?</a>
             </li>
         </ul>
         <hr>
 
     </div>
     <a href="#two" class="back">Next</a>
-	
-    <h2 id="one">Countries with more than average infant mortality rate</h2>
-    <!---
-	<p>See how the highway and city mileages compare for major car brands. Click on the buttons to explore each category. </p>
+    <h2 id="one">Which car brands will get you good mileage?</h2>
+    <p>See how the highway and city mileages compare for major car brands. Click on the buttons to explore each category. </p>
     <div>
         <button id="highway" onclick="change('AverageHighwayMPG')">Average Highway MPG</button>
         <button id="city" onclick="change('AverageCityMPG')">Average City MPG</button>
     </div>
-	--->
     <svg id="scene1" width=1050 height=1100>
-        <!---
-		<text x="900" y="700">Good gas mileage</text>
-		
-        <line x1="0" y1="700" x2="900" y2="700" stroke="black" stroke-dasharray="4" />
-		--->
-    </svg>
+        <text x="900" y="700">Good gas mileage</text>
 
+        <line x1="0" y1="700" x2="900" y2="700" stroke="black" stroke-dasharray="4" />
+    </svg>
 
     <hr>
     <a href="#intro" class="back">Back to Top</a>

@@ -93,12 +93,14 @@ circle {
 div.tooltip {
     position: absolute;
     text-align: center;
-    width: 90px;
-    height: 38px;
+    /*width: 190px;
+    height: 38px;*/
+	width: auto;
+    height: auto;
     padding: 2px;
     font-family: 'Helvetica Light', sans-serif;
     font-weight: lighter;
-    font: 18px sans-serif;
+    font: 13px sans-serif;
     background: rgb(174, 181, 190);
     border: 0px;
     border-radius: 8px;

@@ -165,7 +165,7 @@
 		// Add X axis
 			  var x2 = d3.scaleLinear()
 				.domain([0, 14])
-				.range([ 0, width2]);
+				.range([ 0, width2 ]);
 			  scene2.append("g")
 				.attr("transform", "translate(0," + height2 + ")")
 				.call(d3.axisBottom(x2));
