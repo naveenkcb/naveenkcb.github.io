@@ -337,24 +337,24 @@ d3.csv("https://raw.githubusercontent.com/naveenkcb/naveenkcb.github.io/main/nar
             .attr('transform', 'translate(' + (-margin2.left + 15) + ', ' + (height2 / 2 + margin2.top ) + ')')
             .append('text')
 				.attr("class", "y label")
-				.attr('text-anchor', 'middle')
+				.attr('text-anchor', 'left')
 				.attr("transform", "rotate(-90)")
 				.text("Infant Mortality Rate");
 				
 
 			// Annotation
-			svg.append('rect')
+			scene2.append('rect')
 				.attr("x", 100)
 				.attr("y", 5)
 				.attr("width", 600)
 				.attr("height", 30)
 				.style("fill", 'lightblue')
 
-			svg.append('text')
+			scene2.append('text')
 				.attr("x", 110)
 				.attr("y", 15)
 				.attr("width", 60)
-				.attr("height", 40)
+				.attr("height", 20)
 				.style("fill", 'red')
 				.text("Minimum wage has a greter influence on the infant death rate. As it increases, it tremendously lowers the infant mortality")
 				.attr("text-anchor", "left")
@@ -371,7 +371,7 @@ d3.csv("https://raw.githubusercontent.com/naveenkcb/naveenkcb.github.io/main/nar
 
 <script>
 // set the dimensions and margins of the graph
-var margin = {top: 10, right: 30, bottom: 30, left: 60},
+var margin = {top: 10, right: 30, bottom: 50, left: 60},
 //    width = 460 - margin.left - margin.right,
 //    height = 400 - margin.top - margin.bottom;
 
@@ -455,7 +455,7 @@ d3.csv("https://raw.githubusercontent.com/naveenkcb/naveenkcb.github.io/main/nar
 
 	// Add X axis label:
 	svg.append("text")
-		.attr("text-anchor", "middle")
+		.attr("text-anchor", "left")
 		.attr("x", width)
 		.attr("y", height + margin.top + 20)
 		.text("Fertility Rate (# of childs per woman)");
@@ -496,7 +496,7 @@ d3.csv("https://raw.githubusercontent.com/naveenkcb/naveenkcb.github.io/main/nar
 				.attr("x", 110)
 				.attr("y", 15)
 				.attr("width", 60)
-				.attr("height", 40)
+				.attr("height", 20)
 				.style("fill", 'red')
 				.text("Women giving birth to more children potentially contribute to increasing infant deaths")
 				.attr("text-anchor", "left")
