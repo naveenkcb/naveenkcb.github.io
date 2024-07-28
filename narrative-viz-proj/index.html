@@ -159,21 +159,19 @@
         scene1.append('g')
             .attr('transform', 'translate(' + (width1 / 2) + ', ' + (height1 + margin1.top + 42) + ')')
             .append('text')
-            .attr("class", "x label")
-            .attr('text-anchor', 'middle')
-			.text("Country")
-			.style('color', 'red')
-            .style("opacity", 0).transition().delay(3500).duration(2000).style("opacity", 1);
+				.attr("class", "x label")
+				.attr('text-anchor', 'middle')
+				.text("Country")
+				.style("opacity", 0).transition().delay(3500).duration(2000).style("opacity", 1);
 			
         scene1.append('g')
-            .attr('transform', 'translate(' + (-margin1.left + 15) + ', ' + (height1 / 2 + margin1.top) + ')')
+            .attr('transform', 'translate(' + (-margin1.left + 15) + ', ' + (height1 / 2 + margin1.top + 60 ) + ')')
             .append('text')
-            .attr("class", "y label")
-            .attr('text-anchor', 'middle')
-            .attr("transform", "rotate(-90)")
-            .text("Country")
-			.style('color', 'red')
-            .style("opacity", 0).transition().delay(3500).duration(2000).style("opacity", 1);
+				.attr("class", "y label")
+				.attr('text-anchor', 'middle')
+				.attr("transform", "rotate(-90)")
+				.text("Infant Mortality Rate (# of deaths per 1000 live births)")
+				.style("opacity", 0).transition().delay(3500).duration(2000).style("opacity", 1);
 
 
 	// Add Legend
