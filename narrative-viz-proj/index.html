@@ -94,7 +94,8 @@
 			.call(d3.axisLeft(y1));
 
 		  // Color scale: give me a IMR severity level, I return a color
-		  var color1 = d3.scaleOrdinal()
+		  keys_color = ["Low", "Medium", "High" ]
+		  var color1 = d3.scaleOrdinal(keys_color)
 			.domain(["Low", "Medium", "High" ])
 			//.range([ "#440154ff", "#21908dff", "#fde725ff"])
 			.range([ "cyan", "purple", "orange"])
@@ -126,7 +127,7 @@
 					.style("opacity", .9);
 					
 					bar_tooltip.html("<b>Country:</b> " + d.Country + '<br>' +
-									 "<b>Infant Mortality:</b> " + d.Infant_Mortality +
+									 "<b>Infant Mortality:</b> " + d.Infant_Mortality + '<br>' +
 									 "<b>GDP:</b> " + d.GDP
 									 )
 							.style("left", (d3.event.pageX) + "px")
@@ -162,6 +163,49 @@
 		.attr("y", -margin.left+60)
 		.attr("x", -margin.top)
 		.text("Infant Mortality Rate");
+
+
+	// Legend
+var size = 20
+scene1.selectAll("legend")
+    .data(keys_color)
+    .enter()
+    .append("rect")
+    .attr("x", 100)
+    .attr("y", function (d, i) { return 200 + i * (size + 5) })
+    .attr("width", size)
+    .attr("height", size)
+    .attr("stroke", "black")
+    .style("fill", function (d) { return color1(d) })
+    .on("mouseover", function (d) { filterData(d) })
+    .on("mouseleave", function (d) { filterDataOff(d) })
+
+
+    function filterData(d) {
+        svg.selectAll('.bar')
+            .filter(function(data) {
+                return (data.IMR_Severity != d);
+            })
+            .transition()
+            .style('opacity', 0.05);
+
+        svg.selectAll('.datapoints')
+            .filter(function(data) {
+                return (data.IMR_Severity != d);
+            })
+            .transition()
+            .style('opacity', 0.05);
+    }
+
+    function filterDataOff(d) {
+        svg.selectAll('.bar')
+            .transition()
+            .style('opacity', 0.8);
+
+        svg.selectAll('.datapoints')
+            .transition()
+            .style('opacity', 0.8);
+    }
 
 })	
 </script>
@@ -244,7 +288,7 @@ d3.csv("https://raw.githubusercontent.com/naveenkcb/naveenkcb.github.io/main/nar
 								.style("opacity", .9);
 				
 				scatter_tooltip2.html("<b>Country:</b> " + d.Country + '<br>' +
-									"<b>Infant Mortality:</b> " + d.Infant_Mortality +
+									"<b>Infant Mortality:</b> " + d.Infant_Mortality + '<br>' +
 									"<b>Minimum Wage:</b> " + d.Minimum_Wage)
 								.style("left", (d3.event.pageX) + "px")
 								.style("top", (d3.event.pageY - 28) + "px");
@@ -353,7 +397,7 @@ d3.csv("https://raw.githubusercontent.com/naveenkcb/naveenkcb.github.io/main/nar
 								.duration(200)
 								.style("opacity", .9);
 				 scatter_tooltip.html("<b>Country:</b> " + d.Country + '<br>' +
-									 "<b>Infant Mortality:</b> " + d.Infant_Mortality +
+									 "<b>Infant Mortality:</b> " + d.Infant_Mortality + '<br>' +
 									 "<b>Fertility Rate:</b> " + d.Fertility_Rate
 									 )
 								.style("left", (d3.event.pageX) + "px")
