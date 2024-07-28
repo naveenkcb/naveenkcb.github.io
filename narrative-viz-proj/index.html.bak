@@ -1,11 +1,49 @@
 <!DOCTYPE html>
-<meta charset="utf-8">
+
+<html>
+
+	<head>
+		<title>Infant Mortality Rate</title>
+		<meta charset="utf-8">
+		<!-- Add styles -->
+		<link rel="stylesheet" type="text/css" href="index.css">
+	</head>
 
 <!-- Load d3.js -->
 <script src="https://d3js.org/d3.v5.min.js"></script>
 
-<!-- Create a div where the graph will take place -->
-<div id="scene3"></div>
+
+	<body>
+	<h1 id="intro">Infant Mortality Rate in 2023</h1>
+    <div>
+        <span class="italic">By Naveen Baskaran - UIUC CS 416 - July 2024</span>
+        <hr>
+
+        <h4>
+            Infant mortality rate review for 2023.
+        </h4>
+        <ul>
+            <li>
+                <a href="#one" class="contents">Countries with higher IMR!</a>
+            </li>
+            <li>
+                <a href="#two" class="contents">Does a country's GDP have a direct correlation to IMR?</a>
+            </li>
+            <li>
+                <a href="#three" class="contents">Fertility rate impact?</a>
+            </li>
+        </ul>
+        <hr>
+
+    </div>
+	
+		<!-- Create a div where the graph will take place -->
+		<div id="scene1"></div>
+		<hr> 
+		<div id="scene2"></div>
+		<hr> 
+		<div id="scene3"></div>
+
 
 <script>
 
@@ -78,3 +116,6 @@ d3.csv("https://raw.githubusercontent.com/naveenkcb/naveenkcb.github.io/main/nar
 })
 
 </script>
+
+	</body>
+</html>
