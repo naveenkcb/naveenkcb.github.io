@@ -531,7 +531,7 @@ d3.csv("https://raw.githubusercontent.com/naveenkcb/naveenkcb.github.io/main/nar
 
 	// Legend
 var size = 20
-scene3.selectAll("legend")
+svg.selectAll("legend")
     .data(keys_color)
     .enter()
     .append("rect")
@@ -544,7 +544,7 @@ scene3.selectAll("legend")
     .on("mouseover", function (d) { filterData3(d) })
     .on("mouseleave", function (d) { filterDataOff3(d) })
 
-scene3.selectAll("labels")
+svg.selectAll("labels")
     .data(keys_color)
     .enter()
     .append("text")
@@ -558,7 +558,7 @@ scene3.selectAll("labels")
     .on("mouseleave", function (d) { filterDataOff3(d) })
 
     function filterData3(d) {
-        scene3.selectAll('.dot')
+        svg.selectAll('.dot')
             .filter(function(data) {
                 return (data.IMR_Severity != d);
             })
@@ -567,7 +567,7 @@ scene3.selectAll("labels")
     }
 
     function filterDataOff3(d) {
-        scene3.selectAll('.dot')
+        svg.selectAll('.dot')
             .transition()
             .style('opacity', 0.9);
 
