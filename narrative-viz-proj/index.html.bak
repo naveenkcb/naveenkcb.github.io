@@ -123,7 +123,7 @@
 			    .attr("height", d => height - y1(d.Infant_Mortality))
 			    .attr("fill", function(d) { return color1(d.IMR_Severity) })
 				.on("mouseover", function (d) {
-						bar_tooltip.transition()
+					bar_tooltip.transition()
 					.duration(200)
 					.style("opacity", .9);
 					
@@ -191,8 +191,8 @@ scene1.selectAll("labels")
     .text(function (d) { return d })
     .attr("text-anchor", "left")
     .style("alignment-baseline", "middle")
-    .on("mouseover", filterData)
-    .on("mouseleave", filterDataOff)
+ /*   .on("mouseover", filterData)
+    .on("mouseleave", filterDataOff)  */
 
     var function filterData(d) {
         scene1.selectAll('.mybar')

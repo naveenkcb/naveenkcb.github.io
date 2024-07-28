@@ -194,7 +194,7 @@ scene1.selectAll("labels")
  /*   .on("mouseover", filterData)
     .on("mouseleave", filterDataOff)  */
 
-    var function filterData(d) {
+    function filterData(d) {
         scene1.selectAll('.mybar')
             .filter(function(data) {
                 return (data.IMR_Severity != d);
