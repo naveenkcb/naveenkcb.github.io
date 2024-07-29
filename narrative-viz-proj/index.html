@@ -188,16 +188,16 @@
 	// Add X axis label:
 	scene1.append("text")
 		.attr("text-anchor", "end")
-		.attr("x", width1)
-		.attr("y", height1 + margin1.top + 195)
+		.attr("x", width)
+		.attr("y", height + margin.top + 195)
 		.text("Country");
 		
 	// Y axis label:
 	scene1.append("text")
 		.attr("text-anchor", "end")
 		.attr("transform", "rotate(-90)")
-		.attr("y", -margin.left+60)
-		.attr("x", -margin.top)
+		.attr("y", -margin1.left+60)
+		.attr("x", -margin1.top)
 		.text("Infant Mortality Rate");
 
 
