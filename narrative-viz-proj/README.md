@@ -2,6 +2,8 @@
 
 Final Project Essay By Naveen Baskaran
 
+The visualization is present in this url https://naveenkcb.github.io/narrative-viz-proj/
+
 Messaging 
 This story telling is going to focus on Infant mortality rate (IMR) which is the probability of a child dying before their first birthday, expressed as the number of infant deaths per 1,000 live births. It's a key indicator of a society's overall health because many factors that contribute to infant deaths also affect the health of the entire population. There are many factors that contribute to the IMR. but we will use an interactive slideshow type visualization, to explore the world data collected for the year 2023. This dataset contains around 150 countries across the world with a variety of economic indicators. This slideshow attempts to focus on the country’s Infant Mortality rate and how does a country’s economic data indicators namely Fertility Rate and Minimum Wage affect or contribute to the Infant Mortality Rate .
 
