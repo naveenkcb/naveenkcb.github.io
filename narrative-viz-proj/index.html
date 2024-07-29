@@ -399,6 +399,23 @@ scene2.selectAll("labels")
 
     }
 
+			// Annotation
+			scene2.append('rect')
+				.attr("x", 70)
+				.attr("y", 5)
+				.attr("width", 500)
+				.attr("height", 30)
+				.style("fill", 'lightblue')
+
+			scene2.append('text')
+				.attr("x", 80)
+				.attr("y", 20)
+				.attr("width", 60)
+				.attr("height", 20)
+				.style("fill", 'red')
+				.text("Increased minimum wage tremendously lowers IMR")
+				.attr("text-anchor", "left")
+				.style("alignment-baseline", "middle")
 
 })
 </script>
